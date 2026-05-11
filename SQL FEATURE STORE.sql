@@ -18,25 +18,28 @@ create table f.data_set(
 	data date not null,
 	hora time not null,
 	email_usuario varchar(160) not null,
+	
 	constraint pk_dataset primary key(id),
 	constraint fk_dataset_usuario foreign key(email_usuario) references f.usuario(email)
 );
-create table f.fontes(
+
+create table f.dataset_possui_fontes(
 	id_dataset integer not null,
 	fonte varchar(160) not null,
+	
 	constraint pk_fontes primary key (id_dataset,fonte),
 	constraint fk_fontes_dataset foreign key(id_dataset) references f.data_set(id)
 );
+
 create table f.versao(
 	id_versao	integer not null default nextval('f.id_versao'),
 	email_usuario varchar(160) not null,
 	id_dataset	  integer not null,
 	data date not null,
 	hora time not null,
-	descricao text,
 	csv  varchar(255) not null,
 	nome_versao varchar(120) not null,
-
+	descricao text,
 	id_versao_base integer,
 
     constraint pk_versao
@@ -107,6 +110,7 @@ create table f.feature(
 	id_feature	integer not null default nextval('f.id_feature'),
 	nome_feature varchar(120) not null,
 	descricao text,
+	
 	constraint pk_feature primary key (id_feature)
 );
 
