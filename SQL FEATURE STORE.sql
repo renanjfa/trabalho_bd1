@@ -21,15 +21,21 @@ create table f.data_set(
 	
 	constraint pk_dataset primary key(id),
 	constraint fk_dataset_usuario foreign key(email_usuario) references f.usuario(email)
+		ON DELETE CASCADE
+		ON UPDATE CASCADE
 );
+
 
 create table f.dataset_possui_fontes(
 	id_dataset integer not null,
 	fonte varchar(160) not null,
 	
 	constraint pk_fontes primary key (id_dataset,fonte),
-	constraint fk_fontes_dataset foreign key(id_dataset) references f.data_set(id)
+	constraint fk_fontes_dataset foreign key(id_dataset) references f.data_set(id) 
+		ON DELETE CASCADE
 );
+
+
 
 create table f.versao(
 	id_versao	integer not null default nextval('f.id_versao'),
@@ -47,15 +53,19 @@ create table f.versao(
 
     constraint fk_versao_usuario
         foreign key (email_usuario)
-        references f.usuario(email),
+        references f.usuario(email)
+			ON DELETE CASCADE
+			ON UPDATE CASCADE,
 
     constraint fk_versao_dataset
         foreign key (id_dataset)
-        references f.data_set(id),
+        references f.data_set(id)
+			ON DELETE CASCADE,
 
     constraint fk_versao_base
         foreign key (id_versao_base)
-        references f.versao(id_versao),
+        references f.versao(id_versao)
+			ON DELETE SET NULL,
 
     constraint uq_versao_identificao
         unique (email_usuario, id_dataset, data, hora),
@@ -70,6 +80,7 @@ create table f.versao(
         )
 );
 
+
 create table f.usuario_acessa_versao(
     email_usuario varchar(160) not null,
 	id_versao integer not null,
@@ -81,12 +92,17 @@ create table f.usuario_acessa_versao(
 
     constraint fk_acessa_usuario
         foreign key (email_usuario)
-        references f.usuario(email),
+        references f.usuario(email)
+		ON DELETE CASCADE
+		ON UPDATE CASCADE,
 
     constraint fk_acessa_versao
         foreign key (id_versao)
         references f.versao(id_versao)
+		ON DELETE CASCADE
 );
+
+
 
 CREATE TABLE f.usuario_faz_download_versao (
     email_usuario varchar(160) not null,
@@ -99,12 +115,16 @@ CREATE TABLE f.usuario_faz_download_versao (
 
     constraint fk_download_usuario
         foreign key (email_usuario)
-        references f.usuario(email),
+        references f.usuario(email)
+			ON DELETE CASCADE
+			ON UPDATE CASCADE,
 
     constraint fk_download_versao
         foreign key (id_versao)
         references f.versao(id_versao)
+			ON DELETE CASCADE
 );
+
 
 create table f.feature(
 	id_feature	integer not null default nextval('f.id_feature'),
@@ -114,11 +134,15 @@ create table f.feature(
 	constraint pk_feature primary key (id_feature)
 );
 
+
+
 create table f.versao_possui_feature(
 	id_versao integer not null,
 	id_feature integer not null,
 
 	constraint pk_versao_possui_feature primary key (id_versao,id_feature),
-	constraint fk_possui_versao foreign key (id_versao) references f.versao(id_versao),
+	constraint fk_possui_versao foreign key (id_versao) references f.versao(id_versao)
+		ON DELETE CASCADE,
 	constraint fk_possu_feature foreign key (id_feature) references f.feature(id_feature)
+		ON DELETE CASCADE
 );
