@@ -33,6 +33,7 @@ create table f.versao(
 	id_dataset	  integer not null,
 	data date not null,
 	hora time not null,
+	descricao text,
 	csv  varchar(255) not null,
 	nome_versao varchar(120) not null,
 
