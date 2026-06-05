@@ -1,6 +1,8 @@
 import React from "react";
 import "./MinhaArea.css";
 
+import Header from "../components/Header";
+
 export default function MinhaArea() {
   const datasets = [
     {
@@ -30,17 +32,7 @@ export default function MinhaArea() {
   return (
     <div className="container">
 
-      {/* Header */}
-      <header className="header">
-        <h1>
-          <span className="feature">Feature</span>Store
-        </h1>
-
-        <div className="date">
-          <strong>Tuesday</strong>
-          <span>20/06/2023</span>
-        </div>
-      </header>
+      <Header/>
 
       <div className="content">
 
