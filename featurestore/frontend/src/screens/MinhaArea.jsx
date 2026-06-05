@@ -2,6 +2,7 @@ import React from "react";
 import "./MinhaArea.css";
 
 import Header from "../components/Header";
+import SideBar from "../components/SideBar";
 
 export default function MinhaArea() {
   const datasets = [
@@ -36,31 +37,7 @@ export default function MinhaArea() {
 
       <div className="content">
 
-        {/* Sidebar */}
-        <aside className="sidebar">
-
-          <div className="profile">
-            <img
-              src="https://via.placeholder.com/80"
-              alt="Usuário"
-            />
-
-            <h3>Sundar Gurung</h3>
-            <p>sundargurung36@gmail.com</p>
-          </div>
-
-          <nav>
-            <button>DASHBOARD</button>
-            <button>DATASETS</button>
-            <button className="active">MINHA ÁREA</button>
-            <button>PERFIL</button>
-          </nav>
-
-          <button className="logout">
-            Logout
-          </button>
-
-        </aside>
+        <SideBar/>
 
         {/* Lista de datasets */}
         <section className="datasets">
