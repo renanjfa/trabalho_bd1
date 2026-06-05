@@ -1,0 +1,71 @@
+.datasets,
+.details {
+  background: #f0f0f3;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 0 8px rgba(0,0,0,.1);
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 10px;
+}
+
+.gap-author-data {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 1px;
+    color:gray;
+}
+
+.titulo-dataset {
+    color:black;
+    align-self: left;
+    font-size:xx-large;
+}
+
+.add-btn,
+.versions-btn {
+  background: #f15a24;
+  color: white;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.details h3 {
+  color: #f15a24;
+  margin-top: 30px;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.created {
+  color: gray;
+  margin-top: 10px;
+}
+
+.versions-btn {
+  margin-top: 30px;
+  align-self: center;
+  font-size:medium;
+}
+
+.autor-nome {
+    color: #ff6666;
+}
+
+.gap-descricao-fontes {
+    display: flex;
+    flex-direction: column;
+    align-items:start;
+    gap: 0px;
+}
+
+.descricao-text {
+    text-align:start;
+}
