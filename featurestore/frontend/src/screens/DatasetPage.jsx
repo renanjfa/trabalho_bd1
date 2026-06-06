@@ -4,6 +4,7 @@ import "./style/DatasetPage.css";
 import Header from "../components/Header";
 import DatasetPageDetails from '../components/DatasetPageDetails';
 import ListaVersoes from "../components/ListaVersoes";
+import VersaoDetalhes from "../components/VersaoDetalhes";
 
 
 export default function DatasetPage() {
@@ -46,6 +47,8 @@ export default function DatasetPage() {
                 <DatasetPageDetails/>
 
                 <ListaVersoes versoes={versoes}/>
+
+                <VersaoDetalhes />
             
             </div>
         

@@ -1,0 +1,91 @@
+.datasets,
+.details {
+  background: #f0f0f3;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 0 8px rgba(0,0,0,.1);
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 10px;
+}
+
+.gap-author-data {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 1px;
+    color:gray;
+    font-size:85%;
+}
+
+.titulo-dataset {
+    color:black;
+    align-self: left;
+    font-size:xx-large;
+}
+
+.add-btn,
+.versions-btn {
+  background: #f15a24;
+  color: white;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.details h3 {
+  color: #f15a24;
+  margin-top: 30px;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.created {
+  color: gray;
+  margin-top: 10px;
+}
+
+.versions-btn {
+  margin-top: 30px;
+  align-self: center;
+  font-size:medium;
+  margin-right: 10px;
+}
+
+.editar-versao {
+  margin-top: 30px;
+  align-self: center;
+  font-size:medium;
+  margin-right: 10px;
+  background-color: #f0f0f3;
+  padding: 10px 14px;
+  border-width: 1px;
+  border-color: #0e0d0d;
+  border-radius: 6px;
+  cursor: pointer;
+
+}
+
+.autor-nome {
+    color: #ff6666;
+}
+
+.gap-descricao-fontes {
+    display: flex;
+    flex-direction: column;
+    align-items:start;
+    gap: 0px;
+}
+
+.descricao-text {
+    text-align:start;
+    font-size: 82%;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    max-width: 100%;
+}
