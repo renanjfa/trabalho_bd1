@@ -39,9 +39,9 @@ export default function MinhaArea() {
 
       <div className="content">
 
-        <SideBar activeSection={"minha-area"} />
+        <SideBar activeSection={"datasets"}/>
 
-        <ListaDatasets  datasets={datasets} buttonAdd={true} section={"Minha Área"}/>
+        <ListaDatasets datasets={datasets} buttonAdd={false} section={"Datasets"}/>
 
         <DetalhesDataset/>
 

@@ -4,7 +4,7 @@ import "./SideBar.css";
 import { CircleUser, LogOut, LayoutDashboard, Database, BookMarked, UserPen } from 'lucide-react';
 
 
-export default function SideBar() {
+export default function SideBar({ activeSection }) {
 
     return (
         <aside className="sidebar">
@@ -20,25 +20,21 @@ export default function SideBar() {
 
          {/* OBS: IMPLEMENTAR SELECAO DE SIDEBAR e NAVEGACAO */}
           <nav className="sideBarOptions">
-            <div className="row">
-                <LayoutDashboard/>
-                <button>DASHBOARD</button>
+            <div className={`row ${activeSection === "dashboard" ? "active" : ""}`}>
+              <LayoutDashboard />
+              <button>DASHBOARD</button>
             </div>
 
-            <div className="row">
-                <Database/>
-                <button>DATASETS</button>
+            <div className={`row ${activeSection === "datasets" ? "active" : ""}`}>
+              <Database />
+              <button>DATASETS</button>
             </div>
 
-            <div className="active">
-                <BookMarked/>
-                <button >MINHA ÁREA</button>
+            <div className={`row ${activeSection === "minha-area" ? "active" : ""}`}>
+              <BookMarked />
+              <button>MINHA ÁREA</button>
             </div>
 
-            <div className="row">
-                <UserPen/>
-                <button>DATASETS</button>
-            </div>
           </nav>
 
 
