@@ -3,23 +3,22 @@ import "./DatasetPage.css";
 
 import Header from "../components/Header";
 import DatasetPageDetails from '../components/DatasetPageDetails';
+import ListaVersoes from "../components/ListaVersoes";
 
-import DetalhesDataset from "../components/DetalhesDataset";
-import ListaDatasets from "../components/ListaDatasets";
 
 export default function DatasetPage() {
 
-    const datasets = [
+    const versoes = [
         {
         id: 1,
-        nome: "human-vs-ai text",
+        nome: "versao1",
         descricao:
             "Dataset com samples de textos escritos por humano ou gerados por IAs generativas.",
         autor: "renatjfa",
         },
         {
         id: 2,
-        nome: "brasileirao-2025",
+        nome: "versao2",
         descricao:
             "Dados e estatísticas Brasileirão 2025, gols, jogos, confrontos, cartões, dados ...",
         autor: "jtorres",
@@ -27,7 +26,7 @@ export default function DatasetPage() {
         },
         {
         id: 3,
-        nome: "human-vs-ai text",
+        nome: "versao3",
         descricao:
             "Dataset com samples de textos escritos por humano ou gerados por IAs generativas.",
         autor: "renatjfa",
@@ -42,6 +41,8 @@ export default function DatasetPage() {
             <div className="content">
                     
                 <DatasetPageDetails/>
+
+                <ListaVersoes versoes={versoes}/>
             
             </div>
         

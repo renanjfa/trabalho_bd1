@@ -1,72 +1,76 @@
-.sidebar {
-  width: 250px;
-  background: #ff6a6a;
-  border-radius: 0px;
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;
-  padding: 20px;
-  color: white;
-  display: flex;
-  flex-direction: column;
-  height: 80vh; 
-}
+.dataset-details {
+    width: 320px;
 
-.sideBarOptions {
+    background: #ff6b6b;
+
+    border-radius: 0px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+
+    padding: 10px;
+
+    display: flex;
+    flex-direction: column;
     align-items: flex-start;
+
+    color: white;
+
+    min-height: 70vh;
+
+    box-sizing: border-box;
+
+    box-shadow: 0 2px 10px rgba(0,0,0,.15);
 }
 
-.profile {
+.titulo-dataset {
+    text-align: center;
+
+    font-size: 2rem;
+    color: whitesmoke;
+    font-weight: 700;
+
+    margin-bottom: 30px;
+}
+
+.metadata {
+    font-size: 14px;
+    color: rgba(23, 23, 23, 0.8);
+    font-weight: bold;
+    align-self:self-start ;
+}
+
+.divAutor {
+  margin-bottom: 25px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  margin-bottom: 30px;
+  align-items: start;
 }
 
-.iconUser {
-    display:flex;
-    margin-bottom: 10px;
-    width: 60px;
-    height: 60px;
+.info-section {
+    margin-bottom: 30px;
+    
 }
 
-.profile p {
-  font-size: 12px;
+.info-section h3 {
+    color: white;
+
+    font-size: 20px;
+
+    font-weight: 500;
+    text-align: start;
+    margin-bottom: 15px;
+
 }
 
-.sidebar nav {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
+.descricao-text {
+    color: #ffffff;
 
-.sidebar button {
-  border: none;
-  padding: 12px;
-  border-radius: 8px;
-  cursor: pointer;
-}
+    font-size: small;
 
-.row {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 0px;
-}
+    line-height: 1.8;
 
-.active {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 0px;
-    background: white;
-    color: #ff6a6a;
-    width: 100%;
     text-align: left;
-    border-radius: 5px;
-    padding-left: 5px;
-}
 
-.logout {
-  margin-top: auto;
-  align-self:center;
+    word-break: break-word;
+    overflow-wrap: break-word;
 }
