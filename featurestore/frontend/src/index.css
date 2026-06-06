@@ -1,4 +1,12 @@
 @import "tailwindcss";
+.registro-bg{
+  background-color: #ff6f75;
+  background-image: 
+    radial-gradient(circle at 20px 20px, rgba(0, 0, 0, 0.08) 2px, transparent 2px),
+    linear-gradient(45deg, rgba(0, 0, 0, 0.04) 25%, transparent 25%),
+    linear-gradient(-45deg, rgba(0, 0, 0, 0.04) 25%, transparent 25%);
+  background-size: 80px 80px;
+}
 :root {
   --text: #6b6375;
   --text-h: #08060d;
