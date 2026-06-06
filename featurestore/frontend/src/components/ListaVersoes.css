@@ -1,0 +1,123 @@
+.datasets,
+.details {
+  background: #f0f0f3;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 0 8px rgba(0,0,0,.1);
+}
+
+.datasets {
+  width: 350px;
+
+  background: #f0f0f3;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 0 8px rgba(0,0,0,.1);
+
+  display: flex;
+  flex-direction: column;
+
+  height: 80vh; 
+  box-sizing: border-box;
+}
+
+.details {
+  flex: 1;
+}
+
+.section-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  gap: 10px;
+}
+
+.add-btn,
+.versions-btn {
+  background: #f15a24;
+  color: white;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: medium;
+}
+
+.search {
+  width: 100%;
+  height: 30px;
+  padding: 10px;
+  margin-bottom: 15px;
+
+  background-color: white;
+
+  border: 1px solid #f15a24;
+
+  box-sizing: border-box;
+}
+
+.section-header h2 {
+  color: black;
+}
+
+.dataset-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  flex: 1;
+  overflow-y: auto;
+
+  padding-right: 4px;
+}
+
+.dataset-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.dataset-list::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 999px;
+}
+
+.dataset-list::-webkit-scrollbar-thumb {
+  background: rgba(241, 90, 36, 0.7);
+  border-radius: 999px;
+}
+
+.dataset-list::-webkit-scrollbar-thumb:hover {
+  background: rgba(241, 90, 36, 1);
+}
+
+.dataset-card {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 12px;
+  background: white;
+}
+
+.dataset-card.selected {
+  border: 2px solid #f15a24;
+}
+
+.dataset-card p {
+  margin: 8px 0;
+  color: #666;
+}
+
+.details h3 {
+  color: #f15a24;
+  margin-top: 30px;
+  margin-bottom: 10px;
+}
+
+.created {
+  color: gray;
+  margin-top: 10px;
+}
+
+.versions-btn {
+  margin-top: 30px;
+}
