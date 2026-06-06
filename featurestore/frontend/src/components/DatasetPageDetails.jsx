@@ -1,5 +1,5 @@
 import React from "react";
-import "./DatasetPageDetails.css";
+import "./style/DatasetPageDetails.css";
 
 export default function DatasetPageDetails() {
 

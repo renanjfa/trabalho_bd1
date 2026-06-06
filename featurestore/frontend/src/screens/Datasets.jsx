@@ -1,12 +1,12 @@
 import React from "react";
-import "./MinhaArea.css";
+import "./style/Datasets.css";
 
 import Header from "../components/Header";
 import SideBar from "../components/SideBar";
 import DetalhesDataset from "../components/DetalhesDataset";
 import ListaDatasets from "../components/ListaDatasets";
 
-export default function MinhaArea() {
+export default function Datasets() {
   const datasets = [
     {
       id: 1,

@@ -1,5 +1,5 @@
 import React from "react";
-import "./ListaVersoes.css";
+import "./style/ListaVersoes.css";
 
 import VersaoCard from "./VersaoCard";
 

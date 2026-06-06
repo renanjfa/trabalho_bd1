@@ -1,5 +1,5 @@
 import React from "react";
-import "./ListaDatasets.css";
+import "./style/ListaDatasets.css";
 import DatasetCard from "./DatasetCard";
 
 export default function ListaDatasets({ datasets, buttonAdd, section }) {

@@ -1,5 +1,5 @@
 import React from "react";
-import "./DatasetCard.css";
+import "./style/DatasetCard.css";
 
 export default function DatasetCard({ dataset }) {
 

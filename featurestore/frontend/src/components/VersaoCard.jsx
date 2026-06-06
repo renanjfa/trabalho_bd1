@@ -1,5 +1,5 @@
 import React from "react";
-import "./VersaoCard.css";
+import "./style/VersaoCard.css";
 
 export default function VersaoCard({ versao }) {
 
