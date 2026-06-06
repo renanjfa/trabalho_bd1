@@ -1,8 +1,20 @@
 import { User,Lock } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import InputCampo from "../components/InputCampo";
 import loginIlustration from "../assets/login-ilustration.png";
 
 export default function Login(){
+
+    const navigate = useNavigate();
+
+    function handleSubmit(event) {
+        event.preventDefault();
+
+        // validacao registro
+
+        navigate("/minha-area");
+    }
+
     return (
         <main className="min-h-screen flex items-center justify-center px-6 py-10 registro-bg">
             <section className="w-full max-w-5xl min-h-[540px] bg-[#f8f8f8] rounded-md shadow-lg flex overflow-hidden">
@@ -11,7 +23,7 @@ export default function Login(){
                     <h1 className="text-3xl font-bold !text-black mb-6 ">
                         Login
                     </h1>
-                    <form className="w-full max-w-[430px]">
+                    <form className="w-full max-w-[430px]" onSubmit={handleSubmit}>
                         <div className="space-y-5">
                             <InputCampo icon={User}type="text"placeholder="Insira o nome de usuario"/>
                             <InputCampo icon={Lock}type="password"placeholder="Insira a senha"/>

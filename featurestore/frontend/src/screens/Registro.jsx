@@ -1,8 +1,20 @@
 import { User, Mail,Lock } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import InputCampo from "../components/InputCampo";
 import registerIllustration from "../assets/register-illustration.png";
 
 export default function Registro(){
+
+    const navigate = useNavigate();
+
+    function handleSubmit(event) {
+        event.preventDefault();
+
+        // validacao registro
+
+        navigate("/login");
+    }
+
     return (
         <main className="min-h-screen flex items-center justify-center px-6 py-10 registro-bg">
             <section className="w-full max-w-5xl min-h-[540px] bg-[#f8f8f8] rounded-md shadow-lg flex overflow-hidden">
@@ -17,15 +29,18 @@ export default function Registro(){
                     <h1 className="text-3xl font-bold !text-black mb-7 ">
                         Registro
                     </h1>
-                    <form className="w-full max-w-[430px]">
+                    <form className="w-full max-w-[430px]" onSubmit={handleSubmit}>
                         <div className="space-y-5">
                             <InputCampo icon={User}type="text"placeholder="Insira o nome de usuario"/>
                             <InputCampo icon={Mail}type="email"placeholder="Insira o email"/>
                             <InputCampo icon={Lock}type="password"placeholder="Insira a senha"/>
                         </div>
                         <div className="flex justify-center mt-36">
-                            <button type="submit"className="bg-[#ff7f86] text-white text-sm px-8 py-3 rounded hover:bg-[#ff6f77] transition">
-                                Registro
+                            <button
+                                type="submit"
+                                className="bg-[#ff7f86] text-white text-sm px-8 py-3 rounded hover:bg-[#ff6f77] transition"
+                            >
+                                Registrar
                             </button>
                         </div>
                     </form>

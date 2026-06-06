@@ -9,7 +9,6 @@ export default function SideBar({ activeSection }) {
     return (
         <aside className="sidebar">
 
-
           <div className="profile">
             <CircleUser className="iconUser"/>
 
