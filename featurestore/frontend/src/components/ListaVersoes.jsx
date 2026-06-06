@@ -1,6 +1,7 @@
 import React from "react";
 import "./ListaVersoes.css";
-import DatasetCard from "./DatasetCard";
+
+import VersaoCard from "./VersaoCard";
 
 export default function ListaVersoes({ versoes }) {
 
@@ -21,7 +22,7 @@ export default function ListaVersoes({ versoes }) {
           <div className="dataset-list">
 
             {versoes.map((versao) => (
-              <DatasetCard dataset={versao}/>
+              <VersaoCard versao={versao}/>
             ))}
 
           </div>

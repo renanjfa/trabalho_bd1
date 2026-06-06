@@ -15,6 +15,7 @@ export default function DatasetPage() {
         descricao:
             "Dataset com samples de textos escritos por humano ou gerados por IAs generativas.",
         autor: "renatjfa",
+        created: "21/05/2026"
         },
         {
         id: 2,
@@ -23,6 +24,7 @@ export default function DatasetPage() {
             "Dados e estatísticas Brasileirão 2025, gols, jogos, confrontos, cartões, dados ...",
         autor: "jtorres",
         selecionado: true,
+        created: "21/05/2026"
         },
         {
         id: 3,
@@ -30,6 +32,7 @@ export default function DatasetPage() {
         descricao:
             "Dataset com samples de textos escritos por humano ou gerados por IAs generativas.",
         autor: "renatjfa",
+        created: "21/05/2026"
         },
     ];
 
