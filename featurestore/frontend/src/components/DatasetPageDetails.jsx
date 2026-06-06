@@ -12,7 +12,7 @@ export default function DatasetPageDetails() {
 
             <div className="divAutor">
                 <p className="metadata">Autor: renanjfa</p>
-                <p className="metadata">Created on: 20/06/2023</p>
+                <p className="metadata">Criado em: 20/06/2023</p>
                 <p className="metadata">Hora: 12:00</p>
             </div>
 
