@@ -1,0 +1,21 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #ececf1;
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  min-height: 100vh;
+}
+
+.content {
+  display: flex;
+  gap: 20px;
+  padding-top: 30px;
+  padding-bottom: 0%;
+}

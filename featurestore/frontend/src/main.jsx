@@ -4,9 +4,10 @@ import './index.css'
 // import App from './App.jsx'
 import MinhaArea from './screens/MinhaArea'
 import Datasets from './screens/Datasets'
+import DatasetPage from './screens/DatasetPage'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <MinhaArea />
+    <DatasetPage />
   </StrictMode>,
 )
