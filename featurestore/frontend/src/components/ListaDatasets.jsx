@@ -1,5 +1,6 @@
 import React from "react";
 import "./ListaDatasets.css";
+import DatasetCard from "./DatasetCard";
 
 export default function ListaDatasets() {
 
@@ -8,15 +9,15 @@ export default function ListaDatasets() {
       id: 1,
       nome: "human-vs-ai text",
       descricao:
-        "Dataset com samples de textos escritos por humano ou gerados por IAs generativas.",
-      autor: "renatjfa",
+        "Dataset com samples de textos escritos por humano ou gerados por IAs generativas.aksEUSOUORENANAjdfhaskhgvakjsdvhckajsdhbcajdhbckajdbvhkajsvbdhkasjdhbkasjdchbkajdschbkasjdcbhkasjd ASDKJAGSDKJAGHSDKHAVSDKHJAVSDGHASVDJGHASVDJGHASVDJAGHSDVJAGSHDVJAGSHDVJAGSHDVJAGSHDVAJGSHvcbhkasjdbhcksjdbch",
+      autor: "renanjfa",
     },
     {
       id: 2,
       nome: "brasileirao-2025",
       descricao:
         "Dados e estatísticas Brasileirão 2025, gols, jogos, confrontos, cartões, dados ...",
-      autor: "jtorres",
+      autor: "jjtorres",
       selecionado: true,
     },
     {
@@ -24,7 +25,56 @@ export default function ListaDatasets() {
       nome: "human-vs-ai text",
       descricao:
         "Dataset com samples de textos escritos por humano ou gerados por IAs generativas.",
-      autor: "renatjfa",
+      autor: "renanjfa",
+    },
+    {
+      id: 3,
+      nome: "human-vs-ai text",
+      descricao:
+        "Dataset com samples de textos escritos por humano ou gerados por IAs generativas.",
+      autor: "renanjfa",
+    },
+    {
+      id: 3,
+      nome: "human-vs-ai text",
+      descricao:
+        "Dataset com samples de textos escritos por humano ou gerados por IAs generativas.",
+      autor: "renanjfa",
+    },
+    {
+      id: 3,
+      nome: "human-vs-ai text",
+      descricao:
+        "Dataset com samples de textos escritos por humano ou gerados por IAs generativas.",
+      autor: "renanjfa",
+    },
+    {
+      id: 3,
+      nome: "human-vs-ai text",
+      descricao:
+        "Dataset com samples de textos escritos por humano ou gerados por IAs generativas.",
+      autor: "renanjfa",
+    },
+    {
+      id: 3,
+      nome: "human-vs-ai text",
+      descricao:
+        "Dataset com samples de textos escritos por humano ou gerados por IAs generativas.",
+      autor: "renanjfa",
+    },
+    {
+      id: 3,
+      nome: "human-vs-ai text",
+      descricao:
+        "Dataset com samples de textos escritos por humano ou gerados por IAs generativas.",
+      autor: "renanjfa",
+    },
+    {
+      id: 3,
+      nome: "human-vs-ai text",
+      descricao:
+        "Dataset com samples de textos escritos por humano ou gerados por IAs generativas.",
+      autor: "renanjfa",
     },
   ];
 
@@ -48,20 +98,7 @@ export default function ListaDatasets() {
           <div className="dataset-list">
 
             {datasets.map((dataset) => (
-              <div
-                key={dataset.id}
-                className={`dataset-card ${
-                  dataset.selecionado ? "selected" : ""
-                }`}
-              >
-                <h4>{dataset.nome}</h4>
-
-                <p>{dataset.descricao}</p>
-
-                <small>
-                  Autor: {dataset.autor}
-                </small>
-              </div>
+              <DatasetCard dataset={dataset}/>
             ))}
 
           </div>

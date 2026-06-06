@@ -18,7 +18,7 @@ export default function DetalhesDataset() {
                 </p>
 
                 <p className="created">
-                    <strong>Created on: </strong>20/06/2023
+                    <strong>Criado em: </strong>20/06/2023
                 </p>
             </div>
 
@@ -29,12 +29,12 @@ export default function DetalhesDataset() {
                 <p className="descricao-text" >
                     Dados e estatísticas do Campeonato Brasileiro
                     2025 contendo gols, jogos, confrontos,
-                    cartões, classificação e demais informações.
+                    cartões, classificação e demais informaçõesKAJSDHA.
                 </p>
 
                 <h3>Fontes:</h3>
 
-                <p>
+                <p className="descricao-text">
                     Kaggle, Globoplay, UOL, SBT, Premiere
                 </p>
             </div>

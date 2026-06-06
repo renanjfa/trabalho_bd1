@@ -19,6 +19,7 @@
     align-items: start;
     gap: 1px;
     color:gray;
+    font-size:85%;
 }
 
 .titulo-dataset {
@@ -68,4 +69,8 @@
 
 .descricao-text {
     text-align:start;
+    font-size: 82%;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    max-width: 100%;
 }
