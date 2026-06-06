@@ -1,5 +1,5 @@
 import React from "react";
-import "./SideBar.css";
+import "./style/SideBar.css";
 
 import { CircleUser, LogOut, LayoutDashboard, Database, BookMarked, UserPen } from 'lucide-react';
 

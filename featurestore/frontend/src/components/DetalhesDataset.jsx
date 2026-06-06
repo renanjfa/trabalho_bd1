@@ -1,5 +1,5 @@
 import React from "react";
-import "./DetalhesDataset.css";
+import "./style/DetalhesDataset.css";
 
 export default function DetalhesDataset() {
 

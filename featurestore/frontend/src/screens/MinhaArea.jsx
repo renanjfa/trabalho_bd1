@@ -1,5 +1,5 @@
 import React from "react";
-import "./MinhaArea.css";
+import "./style/MinhaArea.css";
 
 import Header from "../components/Header";
 import SideBar from "../components/SideBar";
