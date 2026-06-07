@@ -1,7 +1,7 @@
 import React from "react";
 import "./style/VersaoDetalhes.css";
 
-export default function VersaoDetalhes() {
+export default function VersaoDetalhes({ onCriarVersao }) {
     
     return (
         <section className="details">
@@ -40,7 +40,7 @@ export default function VersaoDetalhes() {
                     Baixar Versao
                 </button>
                 <span>
-                    <button className="editar-versao">
+                    <button className="editar-versao" onClick={onCriarVersao}>
                         Editar/Criar Versao
                     </button>
                 </span>

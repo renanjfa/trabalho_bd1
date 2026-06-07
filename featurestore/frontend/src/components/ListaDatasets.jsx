@@ -2,7 +2,7 @@ import React from "react";
 import "./style/ListaDatasets.css";
 import DatasetCard from "./DatasetCard";
 
-export default function ListaDatasets({ datasets, buttonAdd, section }) {
+export default function ListaDatasets({ datasets, buttonAdd, section, onAddClick }) {
 
     return(
         <section className="datasets">
@@ -11,7 +11,7 @@ export default function ListaDatasets({ datasets, buttonAdd, section }) {
             <h2>{section}</h2>
 
             {buttonAdd && (
-              <button className="add-btn">
+              <button className="add-btn" onClick={onAddClick}>
                 Adicionar Dataset
               </button>
             )}

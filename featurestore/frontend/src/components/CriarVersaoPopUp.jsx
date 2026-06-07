@@ -1,7 +1,7 @@
 import { useState } from "react";
 import {UploadCloud} from "lucide-react";
 
-export default function AdicionarDataset({aberto, onClose, onSubmit}){
+export default function CriarVersaoPopUp({aberto, onClose, onSubmit, onBack}){
     const [titulo, setTitulo]= useState("");
     const [features, setFeatures]= useState([
         {nome: "", descricao: "" },
@@ -55,7 +55,7 @@ export default function AdicionarDataset({aberto, onClose, onSubmit}){
                         </h2>
                         <div className="mt-1 h-[2px] w-24 bg-[#ef4b2d]"/>
                     </div>
-                    <button type="button" onClick={onClose} className="text-xs font-bold text-black underline hover:text-[#ef4b2d]">
+                    <button type="button" onClick={onBack} className="text-xs font-bold text-black underline hover:text-[#ef4b2d]">
                         Ir atras
                     </button>
                 </div>

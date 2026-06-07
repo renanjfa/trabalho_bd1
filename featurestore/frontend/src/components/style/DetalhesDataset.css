@@ -67,10 +67,11 @@
     gap: 0px;
 }
 
-.descricao-text {
-    text-align:start;
-    font-size: 82%;
-    word-break: break-word;
-    overflow-wrap: break-word;
-    max-width: 100%;
+.descricao-text{
+  text-align:start;
+  font-size: 82%;
+  color: rgb(47, 42, 42) !important;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  max-width: 100%;
 }

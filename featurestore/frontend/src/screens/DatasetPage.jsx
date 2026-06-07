@@ -1,13 +1,17 @@
 import React from "react";
+import { useState } from "react";
 import "./style/DatasetPage.css";
 
 import Header from "../components/Header";
 import DatasetPageDetails from '../components/DatasetPageDetails';
 import ListaVersoes from "../components/ListaVersoes";
 import VersaoDetalhes from "../components/VersaoDetalhes";
+import CriarVersaoPopUp from "../components/CriarVersaoPopUp";
 
 
 export default function DatasetPage() {
+
+    const [popupVersaoAberto, setPopupVersaoAberto] = useState(false);
 
     const versoes = [
         {
@@ -48,7 +52,20 @@ export default function DatasetPage() {
 
                 <ListaVersoes versoes={versoes}/>
 
-                <VersaoDetalhes />
+                <VersaoDetalhes onCriarVersao={() => setPopupVersaoAberto(true)}/>
+
+                <CriarVersaoPopUp
+                    aberto={popupVersaoAberto}
+                    onClose={() => setPopupVersaoAberto(false)}
+                    onBack={() => setPopupVersaoAberto(false)}
+                    onSubmit={(novaVersao) => {
+                        console.log(novaVersao);
+
+                        // chamada para API aqui
+
+                        setPopupVersaoAberto(false);
+                    }}
+                />
             
             </div>
         
