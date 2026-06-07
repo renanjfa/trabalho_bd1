@@ -1,5 +1,5 @@
 import { useState } from "react";
-import {UploadCloud} from "lucide-react";
+import {UploadCloud, ArrowLeft} from "lucide-react";
 
 export default function CriarVersaoPopUp({aberto, onClose, onSubmit, onBack}){
     const [titulo, setTitulo]= useState("");
@@ -56,7 +56,7 @@ export default function CriarVersaoPopUp({aberto, onClose, onSubmit, onBack}){
                         <div className="mt-1 h-[2px] w-24 bg-[#ef4b2d]"/>
                     </div>
                     <button type="button" onClick={onBack} className="text-xs font-bold text-black underline hover:text-[#ef4b2d]">
-                        Ir atras
+                        <ArrowLeft/>
                     </button>
                 </div>
                 <form onSubmit={handleSubmit} className="border border-gray-300 px-4 py-5">

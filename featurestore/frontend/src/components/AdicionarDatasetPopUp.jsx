@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { ArrowLeft } from "lucide-react";
 
 export default function AdicionarDataset({aberto, onClose, onAbrirVersao}){
     const [titulo, setTitulo]= useState("");
@@ -35,7 +36,7 @@ export default function AdicionarDataset({aberto, onClose, onAbrirVersao}){
                         <div className="mt-1 h-[2px] w-20 bg-[#ff5a4f]"/>
                     </div>
                     <button type="button" onClick={onClose} className="text-xs font-bold text-black underline hover:text-[#ff5a4f]">
-                        Ir atras
+                        <ArrowLeft/>
                     </button>
                 </div>
                 <form onSubmit={handleSubmit} className="border border-gray-300 px-4 py-4">
