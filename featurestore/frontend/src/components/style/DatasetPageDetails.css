@@ -75,3 +75,10 @@
     word-break: break-word;
     overflow-wrap: break-word;
 }
+
+.goBack {
+    margin-top: auto;
+  align-self:center;
+  cursor:pointer;
+  margin-bottom: 20px;
+}

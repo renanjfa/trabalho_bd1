@@ -54,6 +54,21 @@
   margin-top: 30px;
   align-self: center;
   font-size:medium;
+  margin-right: 10px;
+}
+
+.editar-versao {
+  margin-top: 30px;
+  align-self: center;
+  font-size:medium;
+  margin-right: 10px;
+  background-color: #f0f0f3;
+  padding: 10px 14px;
+  border-width: 1px;
+  border-color: #0e0d0d;
+  border-radius: 6px;
+  cursor: pointer;
+
 }
 
 .autor-nome {
@@ -67,11 +82,10 @@
     gap: 0px;
 }
 
-.descricao-text{
-  text-align:start;
-  font-size: 82%;
-  color: rgb(47, 42, 42) !important;
-  word-break: break-word;
-  overflow-wrap: break-word;
-  max-width: 100%;
+.descricao-text {
+    text-align:start;
+    font-size: 82%;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    max-width: 100%;
 }

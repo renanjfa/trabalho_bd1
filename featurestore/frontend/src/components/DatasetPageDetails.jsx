@@ -1,7 +1,12 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import "./style/DatasetPageDetails.css";
 
+import { Undo2 } from 'lucide-react';
+
 export default function DatasetPageDetails() {
+
+    const navigate = useNavigate();
 
     return (
         <aside className="dataset-details">
@@ -33,6 +38,10 @@ export default function DatasetPageDetails() {
                     Kaggle, Globoplay, UOL, SBT, Premiere
                 </p>
             </section>
+
+            <button className="goBack" onClick={() => navigate(-1)}>
+                <Undo2/>
+            </button>
 
         </aside>
     )

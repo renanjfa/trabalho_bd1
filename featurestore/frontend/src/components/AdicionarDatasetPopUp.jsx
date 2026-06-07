@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function AdicionarDataset({aberto, onClose, onSubmit}){
+export default function AdicionarDataset({aberto, onClose, onAbrirVersao}){
     const [titulo, setTitulo]= useState("");
     const [fontes, setFontes]= useState("");
     const [descricao, setDescricao]= useState("");
@@ -11,15 +11,17 @@ export default function AdicionarDataset({aberto, onClose, onSubmit}){
     function handleSubmit(event){
         event.preventDefault();
 
-        const novoDataset={
+        const novoDataset = {
             titulo,
             fontes,
             descricao,
         };
+
         setTitulo("");
         setFontes("");
         setDescricao("");
-        onClose();
+
+        onAbrirVersao();
     }
 
     return(

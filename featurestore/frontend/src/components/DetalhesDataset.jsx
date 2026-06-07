@@ -1,7 +1,10 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import "./style/DetalhesDataset.css";
 
 export default function DetalhesDataset() {
+
+    const navigate = useNavigate();
 
     return(
         <section className="details">
@@ -40,7 +43,7 @@ export default function DetalhesDataset() {
             </div>
 
             {/* OBS:  */}
-            <button className="versions-btn">
+            <button className="versions-btn" onClick={() => navigate("/dataset-page")}>
                 Inspecionar Versões
             </button>
 
