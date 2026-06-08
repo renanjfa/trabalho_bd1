@@ -3,22 +3,11 @@ package com.featurestore.featurestore.models;
 import java.sql.Date;
 import java.sql.Time;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
-
 public class AcessoDataset {    // featurestores.usuario_acessa_dataset
     
-    @NotBlank
-    @Size (max = 160)
     private String email_usuario;
-    
-    @NotBlank
     private Integer id_dataset;
-    
-    @NotBlank
     private Date data;
-    
-    @NotBlank
     private Time hora;
 
 

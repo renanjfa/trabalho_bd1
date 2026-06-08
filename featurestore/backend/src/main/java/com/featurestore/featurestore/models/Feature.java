@@ -1,22 +1,13 @@
 package com.featurestore.featurestore.models;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
 
 public class Feature {  // featurestore.feature
     
-    @NotBlank
     private Integer id_feature;    
-
-    @NotBlank
-    @Size (max = 120)
     private String nome_feature;   
-
-    @NotBlank
-    @Size (max = 20)
     private String tipo;  
-      
     private String descricao;   // (type = text)
+
 
     public Integer getId() {
         return this.id_feature;

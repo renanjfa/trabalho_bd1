@@ -1,40 +1,20 @@
 package com.featurestore.featurestore.models;
 
 import java.sql.Time;
-
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
-
 import java.sql.Date;
 
 public class Versao {
     
-    @NotBlank
     private Integer id_versao;
-
-    @NotBlank
-    @Size (max = 160)
     private String email_usuario;
-
-    @NotBlank
     private Integer id_dataset;
-
-    @NotBlank
     private Date data;
-
-    @NotBlank
     private Time hora;
-
-    @NotBlank
     private String csv;
-
-    @NotBlank
-    @Size (max = 120)
     private String nome_versao;
-
     private String descricao;
-
     private Integer id_versao_base;
+    // adicionar versao possui features
 
 
     public Integer getId() {
