@@ -25,7 +25,7 @@ export default function Login(){
                     </h1>
                     <form className="w-full max-w-[430px]" onSubmit={handleSubmit}>
                         <div className="space-y-5">
-                            <InputCampo icon={User}type="text"placeholder="Insira o nome de usuario"/>
+                            <InputCampo icon={User}type="text"placeholder="Insira o email"/>
                             <InputCampo icon={Lock}type="password"placeholder="Insira a senha"/>
                         </div>
                         <div className="mt-12">
