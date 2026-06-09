@@ -8,9 +8,9 @@ public class PgDAOFactory extends DAOFactory {
         this.connection = connection;
     }
 
-    // @Override
-    // public UserDAO getUserDAO() {
-    //     return new PgUserDAO(this.connection);
-    // }    
+    @Override
+    public UsuarioDAO getUsuarioDAO() {
+        return new PgUsuarioDAO(this.connection);
+    }    
     
 }
