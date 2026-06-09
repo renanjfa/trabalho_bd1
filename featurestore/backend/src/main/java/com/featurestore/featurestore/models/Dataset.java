@@ -4,33 +4,17 @@ import java.sql.Date;
 import java.sql.Time;
 import java.util.List;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
-
 public class Dataset {  // featurestore.data_set
     
     // primary key = id
-    // foreign key = email_usuairo
+    // foreign key = email_usuairo;
 
-    @NotBlank
     private Integer id;
-
-    @NotBlank
-    @Size (max = 120)
     private String nome_dataset;    
-    
     private String descricao;   // (type = text)
-    
-    @NotBlank
     private Date data;
-    
-    @NotBlank
     private Time hora;
-    
-    @NotBlank
-    @Size (max = 160)
     private String email_usuario;
-    
     private List<String> fontes;    // relacao e tabela = dataset_possui_fontes
 
     

@@ -1,23 +1,12 @@
 package com.featurestore.featurestore.models;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
-
 public class Usuario { // featurestore.usuario
     
     // primary key = email
     // foreign key = []
 
-    @NotBlank
-    @Size (max = 160)
     private String email;
-
-    @NotBlank
-    @Size (max = 160)
     private String nome_usuario;    
-    
-    @NotBlank
-    @Size (max = 160)
     private String senha;
 
     public String getEmail() {
