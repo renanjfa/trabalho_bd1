@@ -20,27 +20,34 @@ public class PgFeatureDAO implements FeatureDAO {
     }
 
     private static final String CREATE_QUERY =
-                                "INSERT INTO featurestore.feature (nome_feature, tipo, descricao)" +
+                                "INSERT INTO featurestore.feature (nome_feature, tipo, descricao) " +
                                 "VALUES (?, ?, ?);";
 
     private static final String READ_QUERY =
-                                "SELECT nome_feature, tipo, descricao" +
-                                "FROM featurestore.feature" +
+                                "SELECT nome_feature, tipo, descricao " +
+                                "FROM featurestore.feature " +
                                 "WHERE id_feature = ?;";
 
     private static final String UPDATE_QUERY =
-                                "UPDATE featurestore.feature" +
-                                "SET nome_feature = ?, tipo = ?, descricao = ?" +
+                                "UPDATE featurestore.feature " +
+                                "SET nome_feature = ?, tipo = ?, descricao = ? " +
                                 "WHERE id_feature = ?;";
 
     private static final String DELETE_QUERY =
-                                "DELETE FROM featurestore.feature" +
+                                "DELETE FROM featurestore.feature " +
                                 "WHERE id_feature = ?;";
 
     private static final String ALL_QUERY =
-                                "SELECT nome_feature, tipo, descricao" +
+                                "SELECT id_feature, nome_feature, tipo, descricao " +
                                 "FROM featurestore.feature;";
 
+    private static final String GET_BY_TYPE_QUERY =
+                                "SELECT id_feature, nome_feature, tipo, descricao " +
+                                "FROM featurestore.feature " +
+                                "WHERE tipo = ?;";
+
+
+    @Override
     public void create(Feature ft) throws SQLException {
         try(PreparedStatement statement = connection.prepareStatement(CREATE_QUERY)) {
             statement.setString(1, ft.getNome());
@@ -60,6 +67,8 @@ public class PgFeatureDAO implements FeatureDAO {
         }
     }
 
+
+    @Override
     public Feature read(Integer id) throws SQLException{
         Feature ft = new Feature();
 
@@ -89,6 +98,7 @@ public class PgFeatureDAO implements FeatureDAO {
         return ft;
     }
     
+    @Override
     public void update(Feature ft) throws SQLException {
         try(PreparedStatement statement = connection.prepareStatement(UPDATE_QUERY)) {
             statement.setString(1, ft.getNome());
@@ -112,6 +122,7 @@ public class PgFeatureDAO implements FeatureDAO {
         }
     }
     
+    @Override
     public void delete(Integer id) throws SQLException {
         try (PreparedStatement statement = connection.prepareStatement(DELETE_QUERY)) {
             statement.setInt(1, id);
@@ -130,6 +141,7 @@ public class PgFeatureDAO implements FeatureDAO {
         }
     }
     
+    @Override
     public List<Feature> all() throws SQLException{
         List<Feature> featureList = new ArrayList<>();
 
@@ -144,6 +156,36 @@ public class PgFeatureDAO implements FeatureDAO {
 
                 featureList.add(ft);
             }
+        } catch (SQLException ex) {
+            Logger.getLogger(PgFeatureDAO.class.getName()).log(Level.SEVERE, "DAO", ex);
+
+            throw new SQLException("Erro ao listar features.");
+        }
+
+        return featureList;
+    }
+
+    @Override
+    public List<Feature> getByTipo(String tipo) throws SQLException {
+        List<Feature> featureList = new ArrayList<>();
+
+        try (PreparedStatement statement = connection.prepareStatement(GET_BY_TYPE_QUERY)) {
+
+            statement.setString(1, tipo);
+
+            try (ResultSet result = statement.executeQuery()) {
+
+                while (result.next()) {
+                    Feature ft = new Feature();
+                    ft.setId(result.getInt("id_feature"));
+                    ft.setNome(result.getString("nome_feature"));
+                    ft.setTipo(result.getString("tipo"));
+                    ft.setDescricao(result.getString("descricao"));
+    
+                    featureList.add(ft);
+                }
+            }
+        
         } catch (SQLException ex) {
             Logger.getLogger(PgFeatureDAO.class.getName()).log(Level.SEVERE, "DAO", ex);
 
