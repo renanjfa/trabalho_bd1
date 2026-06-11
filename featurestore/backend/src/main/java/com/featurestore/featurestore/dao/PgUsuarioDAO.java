@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import com.featurestore.featurestore.models.Usuario;
+import com.featurestore.featurestore.models.Dataset;
 
 
 public class PgUsuarioDAO implements UsuarioDAO {
@@ -193,4 +194,11 @@ public class PgUsuarioDAO implements UsuarioDAO {
             throw new SQLException("Erro ao autenticar usuário.");
         } 
     }
+
+    @Override
+    public List<Dataset> getMeusDatasets(Usuario user) throws SQLException {
+        List<Dataset> meusDatasets = new ArrayList<>();
+        return meusDatasets;
+    }
+
 }
