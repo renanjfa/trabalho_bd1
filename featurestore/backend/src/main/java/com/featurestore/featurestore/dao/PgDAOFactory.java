@@ -2,8 +2,6 @@ package com.featurestore.featurestore.dao;
 
 import java.sql.Connection;
 
-import com.featurestore.featurestore.models.DownloadVersao;
-
 public class PgDAOFactory extends DAOFactory {
     
     public PgDAOFactory(Connection connection) {
@@ -33,6 +31,11 @@ public class PgDAOFactory extends DAOFactory {
     @Override
     public DownloadVersaoDAO getDownloadVersaoDAO() {
         return new PgDownloadVersaoDAO(this.connection);
+    }
+
+    @Override
+    public VersaoDAO getVersaoDAO() {
+        return new PgVersaoDAO(this.connection);
     }
     
 }

@@ -2,6 +2,7 @@ package com.featurestore.featurestore.models;
 
 import java.sql.Time;
 import java.sql.Date;
+import java.util.List;
 
 public class Versao {
     
@@ -14,7 +15,7 @@ public class Versao {
     private String nome_versao;
     private String descricao;
     private Integer id_versao_base;
-    // adicionar versao possui features
+    private List<Feature> features; // implementa versao_possui_features
 
 
     public Integer getId() {
@@ -87,5 +88,13 @@ public class Versao {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+    public List<Feature> getFeatures() {
+        return this.features;
+    }
+
+    public void setFeatures(List<Feature> features) {
+        this.features = features;
     }
 }
