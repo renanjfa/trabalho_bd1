@@ -17,5 +17,10 @@ public class PgDAOFactory extends DAOFactory {
     public FeatureDAO getFeatureDAO() {
         return new PgFeatureDAO(this.connection);
     } 
+
+    @Override
+    public DatasetDAO getDatasetDAO() {
+        return new PgDatasetDAO(this.connection);
+    }
     
 }

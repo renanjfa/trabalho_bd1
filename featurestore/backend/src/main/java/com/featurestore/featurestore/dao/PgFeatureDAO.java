@@ -23,6 +23,10 @@ public class PgFeatureDAO implements FeatureDAO {
                                 "INSERT INTO featurestore.feature (nome_feature, tipo, descricao) " +
                                 "VALUES (?, ?, ?);";
 
+    private static final String INSERT_WITHOUT_DESC_QUERY =
+                                "INSERT INTO featurestore.feature (nome_feature, tipo) " +
+                                "VALUES (?, ?);";
+
     private static final String READ_QUERY =
                                 "SELECT nome_feature, tipo, descricao " +
                                 "FROM featurestore.feature " +
@@ -67,6 +71,24 @@ public class PgFeatureDAO implements FeatureDAO {
         }
     }
 
+    @Override
+    public void insertWithoutDescricao(Feature ft) throws SQLException {
+        try(PreparedStatement statement = connection.prepareStatement(INSERT_WITHOUT_DESC_QUERY)) {
+            statement.setString(1, ft.getNome());
+            statement.setString(2, ft.getTipo());
+
+            statement.executeUpdate();
+
+        } catch (SQLException ex)  {
+            Logger.getLogger(PgFeatureDAO.class.getName()).log(Level.SEVERE, "DAO", ex);
+
+            if (ex.getMessage().contains("not-null")) {
+                throw new SQLException("Erro ao inserir FEATURE: pelo menos um campo está em branco.");
+            } else {
+                throw new SQLException("Erro ao inserir feature.");
+            }
+        }
+    }
 
     @Override
     public Feature read(Integer id) throws SQLException{
@@ -110,7 +132,7 @@ public class PgFeatureDAO implements FeatureDAO {
                 throw new SQLException("Erro ao editar: feature não encontrado.");
             }
         } catch (SQLException ex) {
-            Logger.getLogger(PgUsuarioDAO.class.getName()).log(Level.SEVERE, "DAO", ex);
+            Logger.getLogger(PgFeatureDAO.class.getName()).log(Level.SEVERE, "DAO", ex);
 
             if (ex.getMessage().equals("Erro ao editar: feature não encontrado.")) {
                 throw ex;
@@ -195,5 +217,4 @@ public class PgFeatureDAO implements FeatureDAO {
         return featureList;
     }
 
-    
 }
