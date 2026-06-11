@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState} from "react";
 import "./style/Datasets.css";
 
 import Header from "../components/Header";
@@ -7,6 +7,9 @@ import DetalhesDataset from "../components/DetalhesDataset";
 import ListaDatasets from "../components/ListaDatasets";
 
 export default function Datasets() {
+
+  const [selectedDatasetId, setSelectedDatasetId] = useState(null);
+
   const datasets = [
     {
       id: 1,
@@ -21,7 +24,6 @@ export default function Datasets() {
       descricao:
         "Dados e estatísticas Brasileirão 2025, gols, jogos, confrontos, cartões, dados ...",
       autor: "jtorres",
-      selecionado: true,
     },
     {
       id: 3,
@@ -41,7 +43,8 @@ export default function Datasets() {
 
         <SideBar activeSection={"datasets"}/>
 
-        <ListaDatasets datasets={datasets} buttonAdd={false} section={"Datasets"}/>
+        <ListaDatasets datasets={datasets} buttonAdd={false} section={"Datasets"} 
+                      selectedDatasetId={selectedDatasetId} onSelectDataset={setSelectedDatasetId}/>
 
         <DetalhesDataset/>
 

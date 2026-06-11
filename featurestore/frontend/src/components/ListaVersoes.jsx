@@ -3,7 +3,7 @@ import "./style/ListaVersoes.css";
 
 import VersaoCard from "./VersaoCard";
 
-export default function ListaVersoes({ versoes }) {
+export default function ListaVersoes({ versoes, selectedVersaoId, onSelectVersao  }) {
 
     return(
         <section className="datasets">
@@ -22,7 +22,7 @@ export default function ListaVersoes({ versoes }) {
           <div className="dataset-list">
 
             {versoes.map((versao) => (
-              <VersaoCard versao={versao}/>
+              <VersaoCard versao={versao} selected={versao.id === selectedVersaoId} onClick={() => onSelectVersao(versao.id)}/>
             ))}
 
           </div>

@@ -1,14 +1,13 @@
 import React from "react";
 import "./style/VersaoCard.css";
 
-export default function VersaoCard({ versao }) {
+export default function VersaoCard({ versao, onClick, selected }) {
 
     return(
-        <div
+        <button
             key={versao.id}
-            className={`versao-card ${
-                versao.selecionado ? "selected" : ""
-            }`}
+            className={`versao-card ${selected ? "selected" : ""}`}
+            onClick={onClick}
             >
             <h4 className="nome-versao">{versao.nome}</h4>
 
@@ -22,6 +21,6 @@ export default function VersaoCard({ versao }) {
                 {versao.created}
                 </small>
             </div>
-        </div>
+        </button>
     )
 }

@@ -2,7 +2,7 @@ import React from "react";
 import "./style/ListaDatasets.css";
 import DatasetCard from "./DatasetCard";
 
-export default function ListaDatasets({ datasets, buttonAdd, section, onAddClick }) {
+export default function ListaDatasets({ datasets, buttonAdd, section, onAddClick, selectedDatasetId, onSelectDataset }) {
 
     return(
         <section className="datasets">
@@ -26,7 +26,7 @@ export default function ListaDatasets({ datasets, buttonAdd, section, onAddClick
           <div className="dataset-list">
 
             {datasets.map((dataset) => (
-              <DatasetCard dataset={dataset}/>
+              <DatasetCard key={dataset.id} dataset={dataset} selected={dataset.id === selectedDatasetId} onClick={() => onSelectDataset(dataset.id)}/>
             ))}
 
           </div>

@@ -20,25 +20,25 @@ public class PgUsuarioDAO implements UsuarioDAO {
     }
 
     private static final String CREATE_QUERY =
-                                "INSERT INTO featurestore.usuario (email, nome_usuario, senha)" +
+                                "INSERT INTO featurestore.usuario (email, nome_usuario, senha) " +
                                 "VALUES (?, ?, MD5(?));";
 
     private static final String READ_BY_EMAIL_QUERY =
-                                "SELECT email, nome_usuario" +
-                                "FROM featurestore.usuario" +
+                                "SELECT email, nome_usuario " +
+                                "FROM featurestore.usuario " +
                                 "WHERE email = ?";
 
     private static final String DELETE_BY_EMAIL_QUERY =
-                                "DELETE FROM featurestore.usuario" +
+                                "DELETE FROM featurestore.usuario " +
                                 "WHERE email = ?;";
 
     private static final String ALL_QUERY =
-                                "SELECT email, nome" +
-                                "FROM featurestore.usuario";
+                                "SELECT email, nome " +
+                                "FROM featurestore.usuario;";
     
     private static final String UPDATE_QUERY =
-                                "UPDATE featurestore.usuario" +
-                                "SET nome_usuario = ?, senha = MD5(?)" +
+                                "UPDATE featurestore.usuario " +
+                                "SET nome_usuario = ?, senha = MD5(?) " +
                                 "WHERE email = ?;";
 
     private static final String AUTHENTICATE_QUERY =
@@ -72,8 +72,7 @@ public class PgUsuarioDAO implements UsuarioDAO {
     @Override
     public Usuario read(Integer id) throws SQLException {
 
-        Usuario user = new Usuario();
-        return user;
+       throw new UnsupportedOperationException("Operação não suportada.");
     }
 
     @Override
@@ -129,7 +128,9 @@ public class PgUsuarioDAO implements UsuarioDAO {
 
     /* ATENCAO: Nao usar a funcao delete. Primary key = email. Utilizar deleteByEmail */
     @Override
-    public void delete(Integer id) throws SQLException {}
+    public void delete(Integer id) throws SQLException {
+        throw new UnsupportedOperationException("Operação não suportada.");
+    }
 
     @Override
     public void deleteByEmail(String email) throws SQLException {
