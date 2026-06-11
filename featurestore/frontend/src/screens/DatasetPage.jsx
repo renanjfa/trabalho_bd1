@@ -12,6 +12,7 @@ import CriarVersaoPopUp from "../components/CriarVersaoPopUp";
 export default function DatasetPage() {
 
     const [popupVersaoAberto, setPopupVersaoAberto] = useState(false);
+    const [selectedVersaoId, setSelectedVersaoId] = useState(null);
 
     const versoes = [
         {
@@ -28,7 +29,6 @@ export default function DatasetPage() {
         descricao:
             "Dados e estatísticas Brasileirão 2025, gols, jogos, confrontos, cartões, dados ...",
         autor: "jtorres",
-        selecionado: true,
         created: "21/05/2026"
         },
         {
@@ -50,7 +50,7 @@ export default function DatasetPage() {
                     
                 <DatasetPageDetails/>
 
-                <ListaVersoes versoes={versoes}/>
+                <ListaVersoes versoes={versoes} selectedVersaoId={selectedVersaoId} onSelectVersao={setSelectedVersaoId}/>
 
                 <VersaoDetalhes onCriarVersao={() => setPopupVersaoAberto(true)}/>
 

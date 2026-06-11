@@ -12,6 +12,14 @@
 
     height: 75px;
     width: 95%;
+
+    cursor: pointer;
+}
+
+.versao-card.selected {
+    border-color: #f0782d;
+    border-width: 2px;
+    box-shadow: 0 0 0 1px rgba(79, 70, 229, 0.2);
 }
 
 .footer-card {

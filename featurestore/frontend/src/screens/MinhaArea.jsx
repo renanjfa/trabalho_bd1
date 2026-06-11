@@ -14,6 +14,8 @@ export default function MinhaArea() {
   const [popupDatasetAberto, setPopupDatasetAberto] = useState(false);
   const [popupVersaoAberto, setPopupVersaoAberto] = useState(false);
 
+  const [selectedDatasetId, setSelectedDatasetId] = useState(null);
+
   const datasets = [
     {
       id: 1,
@@ -28,7 +30,6 @@ export default function MinhaArea() {
       descricao:
         "Dados e estatísticas Brasileirão 2025, gols, jogos, confrontos, cartões, dados ...",
       autor: "jtorres",
-      selecionado: true,
     },
     {
       id: 3,
@@ -48,7 +49,8 @@ export default function MinhaArea() {
 
         <SideBar activeSection={"minha-area"} />
 
-        <ListaDatasets  datasets={datasets} buttonAdd={true} section={"Minha Área"} onAddClick={() => setPopupDatasetAberto(true)}/>
+        <ListaDatasets  datasets={datasets} buttonAdd={true} section={"Minha Área"} onAddClick={() => setPopupDatasetAberto(true)}
+                        selectedDatasetId={selectedDatasetId} onSelectDataset={setSelectedDatasetId}/>
 
         <AdicionarDatasetPopUp
             aberto={popupDatasetAberto}
