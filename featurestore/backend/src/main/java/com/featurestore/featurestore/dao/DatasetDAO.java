@@ -2,9 +2,6 @@ package com.featurestore.featurestore.dao;
 
 import java.sql.SQLException;
 import java.util.List;
-
-// import java.sql.SQLException;
-// import java.util.List;
 import com.featurestore.featurestore.models.Dataset;
 
 public interface DatasetDAO extends DAO<Dataset> {

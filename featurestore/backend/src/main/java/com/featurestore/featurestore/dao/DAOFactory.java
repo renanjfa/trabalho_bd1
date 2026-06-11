@@ -84,5 +84,7 @@ public abstract class DAOFactory implements AutoCloseable {
     public abstract FeatureDAO getFeatureDAO();
 
     public abstract DatasetDAO getDatasetDAO();
+
+    public abstract AcessoDatasetDAO getAcessoDatasetDAO();
     
 }

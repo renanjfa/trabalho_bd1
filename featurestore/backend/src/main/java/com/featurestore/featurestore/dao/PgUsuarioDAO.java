@@ -72,8 +72,7 @@ public class PgUsuarioDAO implements UsuarioDAO {
     @Override
     public Usuario read(Integer id) throws SQLException {
 
-        Usuario user = new Usuario();
-        return user;
+       throw new UnsupportedOperationException("Operação não suportada.");
     }
 
     @Override
@@ -129,7 +128,9 @@ public class PgUsuarioDAO implements UsuarioDAO {
 
     /* ATENCAO: Nao usar a funcao delete. Primary key = email. Utilizar deleteByEmail */
     @Override
-    public void delete(Integer id) throws SQLException {}
+    public void delete(Integer id) throws SQLException {
+        throw new UnsupportedOperationException("Operação não suportada.");
+    }
 
     @Override
     public void deleteByEmail(String email) throws SQLException {
