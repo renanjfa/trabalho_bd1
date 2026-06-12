@@ -47,6 +47,17 @@ public class PgUsuarioDAO implements UsuarioDAO {
                                 "FROM featurestore.usuario " +
                                 "WHERE email = ? AND senha = md5(?);";
 
+    private static final String GET_MY_DATASETS_QUERY = 
+                                "SELECT DISTINCT ds.id, ds.nome_dataset, ds.descricao, ds.data, ds.hora, ds.email_usuario " +
+                                "FROM featurestore.data_set ds " +
+                                "WHERE ds.email_usuario = ? " +
+                                "   OR EXISTS ( " +
+                                "        SELECT 1 " +
+                                "        FROM featurestore.versao v " +
+                                "        WHERE v.id_dataset = ds.id " +
+                                "          AND v.email_usuario = ? " +
+                                ") ORDER BY ds.data DESC, ds.hora DESC;";
+
     
     @Override
     public void create(Usuario user) throws SQLException {
@@ -198,6 +209,31 @@ public class PgUsuarioDAO implements UsuarioDAO {
     @Override
     public List<Dataset> getMeusDatasets(Usuario user) throws SQLException {
         List<Dataset> meusDatasets = new ArrayList<>();
+
+        try (PreparedStatement statement = connection.prepareStatement(GET_MY_DATASETS_QUERY)) {
+            statement.setString(1, user.getEmail());
+            statement.setString(2, user.getEmail());
+
+            try (ResultSet result = statement.executeQuery()) {
+                while(result.next()) {
+                    Dataset data = new Dataset();
+
+                    data.setId(result.getInt("id"));
+                    data.setNome(result.getString("nome_dataset"));
+                    data.setDescricao(result.getString("descricao"));
+                    data.setData(result.getDate("data"));
+                    data.setHora(result.getTime("hora"));
+                    data.setEmailUsuario(result.getString("email_usuario"));
+
+                    meusDatasets.add(data);
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PgDatasetDAO.class.getName()).log(Level.SEVERE, "DAO", ex);
+
+            throw new SQLException("Erro ao resgatar datasets do usuário.");
+        }
+
         return meusDatasets;
     }
 
