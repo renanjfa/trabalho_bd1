@@ -2,11 +2,11 @@ package com.featurestore.featurestore.service;
 import com.featurestore.featurestore.dao.DAOFactory;
 import com.featurestore.featurestore.dao.UsuarioDAO;
 import com.featurestore.featurestore.models.Usuario;
+import com.featurestore.featurestore.security.JwtUtil;
 import com.featurestore.featurestore.models.Dataset;
 
 import java.util.List;
-import java.io.IOException;
-import java.sql.SQLDataException;
+
 
 public class UsuarioService {
     public Usuario registrar(String email, String nome, String senha) throws Exception{
@@ -30,7 +30,7 @@ public class UsuarioService {
         }
         return usuario;
     }
-    public Usuario autenticar(String email, String senha)throws Exception{
+    public String autenticar(String email, String senha)throws Exception{
         if (email == null || email.isBlank() || senha == null || senha.isBlank()){
             throw new Exception("Email e senha sao obrigatorios");
         }
@@ -39,9 +39,9 @@ public class UsuarioService {
         usuario.setSenha(senha);
         try (DAOFactory daoFactory = DAOFactory.getInstance()){
             UsuarioDAO dao = daoFactory.getUsuarioDAO();
-            dao.create(usuario);
+            dao.authenticate(usuario);
         }
-        return usuario;
+        return JwtUtil.generateToken(email);
     }
     public Usuario buscarPorEmail(String email) throws Exception{
         try (DAOFactory daoFactory = DAOFactory.getInstance()){
