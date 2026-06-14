@@ -1,5 +1,5 @@
 import { useState } from "react";
-import {UploadCloud, ArrowLeft} from "lucide-react";
+import {UploadCloud, ArrowLeft, X} from "lucide-react";
 
 export default function CriarVersaoPopUp({aberto, onClose, onSubmit, onBack}){
     const [titulo, setTitulo]= useState("");
@@ -19,6 +19,10 @@ export default function CriarVersaoPopUp({aberto, onClose, onSubmit, onBack}){
     function atualizarFeature(index, campo, valor){
         const novasFeatures=[...features];
         novasFeatures[index][campo]=valor;
+        setFeatures(novasFeatures);
+    }
+    function removerFeature(index){
+        const novasFeatures = features.filter((_,i)=>i !==index);
         setFeatures(novasFeatures);
     }
 
@@ -77,6 +81,11 @@ export default function CriarVersaoPopUp({aberto, onClose, onSubmit, onBack}){
                                 <div key={index} className="flex gap-2">
                                     <input type="text" placeholder="nome" value={feature.nome} onChange={(event)=> atualizarFeature(index, "nome", event.target.value)} className="h-8 w-24 rounded border border-gray-300 px-2 text-xs outline-none focus:border-[#ef4b2d]"/>
                                     <input type="text" placeholder="descricao feature" value={feature.descricao} onChange={(event)=> atualizarFeature(index, "descricao", event.target.value)} className="h-8 w-full max-w-sm rounded border border-gray-300 px-2 text-xs outline-none focus:border-[#ef4b2d]"/>
+                                    {features.length > 1 && (
+                                        <button type="button" onClick={()=> removerFeature(index)} className="text-red-500 hover:text-red-700">
+                                            <X size={16}/>
+                                        </button>
+                                    )}
                                 </div>
                             ))}
                         </div>
@@ -102,7 +111,7 @@ export default function CriarVersaoPopUp({aberto, onClose, onSubmit, onBack}){
                             <input type="file" accept=".csv" className="hidden" onChange={(event)=> setArquivoCsv(event.target.files[0])}/>
                         </label>
                         {arquivoCsv && (
-                            <p className="mt-2 text-xs text-g}">
+                            <p className="mt-2 text-xs text-gray-500}">
                                 Arquivo selecionado: {arquivoCsv.name}
                             </p>
                         )}
