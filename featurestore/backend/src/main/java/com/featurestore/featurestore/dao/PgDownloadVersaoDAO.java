@@ -33,7 +33,7 @@ public class PgDownloadVersaoDAO implements DownloadVersaoDAO {
                                 "WHERE email_usuario = ?;";
 
     private static final String ALL_QUERY =
-                                "SELECT * FROM eaturestore.usuario_faz_download_versao; ";
+                                "SELECT * FROM featurestore.usuario_faz_download_versao; ";
 
 
 
