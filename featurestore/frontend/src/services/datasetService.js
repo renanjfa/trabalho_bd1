@@ -20,3 +20,7 @@ export async function deletarDataset(id){
         method: "DELETE",
     });
 }
+
+export async function listarMeusDatasets(){
+    return api("/meus-datasets");
+}
