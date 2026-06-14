@@ -3,7 +3,6 @@ package com.featurestore.featurestore.controller;
 import com.featurestore.featurestore.service.UsuarioService;
 import com.featurestore.featurestore.models.Usuario;
 import com.featurestore.featurestore.models.Dataset;
-import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
