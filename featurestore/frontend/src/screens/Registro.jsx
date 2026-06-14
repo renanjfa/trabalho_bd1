@@ -5,6 +5,10 @@ import registerIllustration from "../assets/register-illustration.png";
 
 export default function Registro(){
 
+    const [nome, setNome] = useState("");
+    const [email, setEmail] = useState("");
+    const [senha, setSenha] = useState("");
+
     const navigate = useNavigate();
 
     function handleSubmit(event) {
@@ -31,9 +35,9 @@ export default function Registro(){
                     </h1>
                     <form className="w-full max-w-[430px]" onSubmit={handleSubmit}>
                         <div className="space-y-5">
-                            <InputCampo icon={User}type="text"placeholder="Insira o nome de usuario"/>
-                            <InputCampo icon={Mail}type="email"placeholder="Insira o email"/>
-                            <InputCampo icon={Lock}type="password"placeholder="Insira a senha"/>
+                            <InputCampo icon={User} type="text" placeholder="Insira o nome de usuario" value={nome} onChange={setNome}/>
+                            <InputCampo icon={Mail} type="email" placeholder="Insira o email" value={email} onChange={setEmail}/>
+                            <InputCampo icon={Lock} type="password" placeholder="Insira a senha" value={senha} onChange={setSenha}/>
                         </div>
                         <div className="flex justify-center mt-36">
                             <button
