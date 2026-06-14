@@ -39,6 +39,8 @@ public class VersaoService {
                 }
             }else{
                 if (descricao != null && !descricao.isBlank()) {
+                    versaoDAO.insertWithoutVersaoBase(versao);
+                }else{
                     versaoDAO.insertWithoutDescricaoAndVersaoBase(versao);
                 }
             }
