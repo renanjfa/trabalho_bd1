@@ -22,7 +22,7 @@ export default function ListaVersoes({ versoes, selectedVersaoId, onSelectVersao
           <div className="dataset-list">
 
             {versoes.map((versao) => (
-              <VersaoCard versao={versao} selected={versao.id === selectedVersaoId} onClick={() => onSelectVersao(versao.id)}/>
+              <VersaoCard key={versao.id_versao} versao={versao} selected={versao.id_versao === selectedVersaoId} onClick={() => onSelectVersao(versao.id_versao)}/>
             ))}
 
           </div>

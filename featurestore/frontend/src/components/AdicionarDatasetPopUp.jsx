@@ -1,13 +1,25 @@
 import { useState } from "react";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, X } from "lucide-react";
 
 export default function AdicionarDataset({aberto, onClose, onAbrirVersao}){
     const [titulo, setTitulo]= useState("");
-    const [fontes, setFontes]= useState("");
+    const [fontes, setFontes]= useState([""]);
     const [descricao, setDescricao]= useState("");
 
     if(!aberto){
         return null;
+    }
+    function adicionarFonte(){
+        setFontes([...fontes, ""]);
+    }
+    function atualizarFontes(index, valor){
+        const novasFontes=[...fontes];
+        novasFontes[index]= valor;
+        setFontes(novasFontes);
+    }
+    function removerFonte(index){
+        const novasFontes= fontes.filter((_,i)=>i!==index);
+        setFontes(novasFontes);
     }
     function handleSubmit(event){
         event.preventDefault();
@@ -19,7 +31,7 @@ export default function AdicionarDataset({aberto, onClose, onAbrirVersao}){
         };
 
         setTitulo("");
-        setFontes("");
+        setFontes([""]);
         setDescricao("");
 
         onAbrirVersao();
@@ -51,8 +63,22 @@ export default function AdicionarDataset({aberto, onClose, onAbrirVersao}){
                         <label className="mb-2 block text-xs font-bold text-black">
                             Fontes
                         </label>
-                        <input type="text" value={fontes} onChange={(event)=> setFontes(event.target.value)}
-                            className="h-8 w-20 rounded border border-gray-300 px-2 text-sm outline-none focus:border-[#ff5a4f]"/>
+                        <div className="space-y-2">
+                            {fontes.map((fonte, index)=>(
+                                <div key={index} className="flex items-center gap-2">
+                                    <input type="text" placeholder="Nome da fonte" value={fonte} onChange={(event)=> atualizarFontes(index, event.target.value)}
+                                        className="h-8 w-full max-w-md rounded border border-gray-300 px-2 text-sm outline-none focus:border-[#ff5a4f]"/>
+                                    {fontes.length > 1 && (
+                                        <button type="button" onClick={()=> removerFonte(index)} className="text-red-500 hover:text-red-700">
+                                            < X size={16}/>
+                                        </button>
+                                    )}
+                                </div>
+                            ))}
+                        </div>
+                        <button type="button" onClick={adicionarFonte} className="mt-2 rounded border-gray-400 px-2 py-1 text-xs text-black hover:bg-gray-100">
+                            Adicionar fonte +
+                        </button>
                     </div>
                     <div className="mb-4">
                         <label className="mb-2 block text-xs font-bold text-black">
