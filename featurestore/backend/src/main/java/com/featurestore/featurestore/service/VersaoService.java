@@ -60,7 +60,7 @@ public class VersaoService {
             return dao.getByIdDataset(idDataset);
         }
     }
-    public List<Versao> listarPorUsuario(String emailUsuario) throws Exception{
+    public List<Versao> listarPosirUsuario(String emailUsuario) throws Exception{
         try(DAOFactory daoFactory = DAOFactory.getInstance()){
             VersaoDAO dao = daoFactory.getVersaoDAO();
             return dao.getByEmailUsuario(emailUsuario);
