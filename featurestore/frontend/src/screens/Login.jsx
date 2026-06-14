@@ -1,9 +1,13 @@
+import { use, useState } from "react";
 import { User,Lock } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import InputCampo from "../components/InputCampo";
 import loginIlustration from "../assets/login-ilustration.png";
 
 export default function Login(){
+
+    const[email, setEmail]= useState("");
+    const[senha, setSenha]= useState("");
 
     const navigate = useNavigate();
 
@@ -25,8 +29,8 @@ export default function Login(){
                     </h1>
                     <form className="w-full max-w-[430px]" onSubmit={handleSubmit}>
                         <div className="space-y-5">
-                            <InputCampo icon={User}type="text"placeholder="Insira o email"/>
-                            <InputCampo icon={Lock}type="password"placeholder="Insira a senha"/>
+                            <InputCampo icon={User} type="text" placeholder="Insira o email" value={email} onChange={setEmail}/>
+                            <InputCampo icon={Lock} type="password" placeholder="Insira a senha" value={senha} onChange={setSenha}/>
                         </div>
                         <div className="mt-12">
                             <button type="submit"className="bg-[#ff7f86] text-white text-sm px-8 py-3 rounded hover:bg-[#ff6f77] transition">
