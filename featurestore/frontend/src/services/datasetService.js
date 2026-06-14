@@ -16,7 +16,7 @@ export async function criarDatasets(nome_dataset, descricao, fontes){
 }
 
 export async function deletarDataset(id){
-    return api("/datasets" + id, {
+    return api("/datasets/" + id, {
         method: "DELETE",
     });
 }

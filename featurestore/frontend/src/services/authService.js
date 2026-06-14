@@ -12,6 +12,8 @@ export async function login(email,senha){
         method: "POST",
         body: JSON.stringify({email,senha}),
     });
+    localStorage.setItem("token", data.token);
+    return data;
 }
 
 export function logout(){
