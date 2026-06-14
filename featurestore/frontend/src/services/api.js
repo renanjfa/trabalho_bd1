@@ -22,3 +22,6 @@ export async function api(endpoint, options={}){
 
     return data;
 }
+export async function listarMeusDatasets(){
+    return api("/meus-datasets");
+}
