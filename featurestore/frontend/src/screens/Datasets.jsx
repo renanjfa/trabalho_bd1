@@ -1,38 +1,30 @@
-import React, { useState} from "react";
+import React, { useState, useEffect} from "react";
 import "./style/Datasets.css";
 
 import Header from "../components/Header";
 import SideBar from "../components/SideBar";
 import DetalhesDataset from "../components/DetalhesDataset";
 import ListaDatasets from "../components/ListaDatasets";
+import { listarDatasets } from "../services/datasetservice";
 
 export default function Datasets() {
 
   const [selectedDatasetId, setSelectedDatasetId] = useState(null);
 
-  const datasets = [
-    {
-      id: 1,
-      nome: "human-vs-ai text",
-      descricao:
-        "Dataset com samples de textos escritos por humano ou gerados por IAs generativas.",
-      autor: "renatjfa",
-    },
-    {
-      id: 2,
-      nome: "brasileirao-2025",
-      descricao:
-        "Dados e estatísticas Brasileirão 2025, gols, jogos, confrontos, cartões, dados ...",
-      autor: "jtorres",
-    },
-    {
-      id: 3,
-      nome: "human-vs-ai text",
-      descricao:
-        "Dataset com samples de textos escritos por humano ou gerados por IAs generativas.",
-      autor: "renatjfa",
-    },
-  ];
+  const [datasets, setDatasets]= useState([]);
+
+  useEffect(()=>{
+    async function carregar(){
+      try {
+        const data = await listarDatasets();
+        setDatasets(data);
+      }catch(e){
+        console.error(e.message);
+      }
+    }
+    carregar();
+  },[]);
+  const datasetSelecionado = datasets.find(d=> d.id === selectedDatasetId);
 
   return (
     <div className="container">
@@ -46,7 +38,7 @@ export default function Datasets() {
         <ListaDatasets datasets={datasets} buttonAdd={false} section={"Datasets"} 
                       selectedDatasetId={selectedDatasetId} onSelectDataset={setSelectedDatasetId}/>
 
-        <DetalhesDataset/>
+        <DetalhesDataset dataset={datasetSelecionado}/>
 
       </div>
 

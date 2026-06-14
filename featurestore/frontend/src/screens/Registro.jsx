@@ -1,22 +1,28 @@
+import { useState } from "react";
 import { User, Mail,Lock } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import InputCampo from "../components/InputCampo";
 import registerIllustration from "../assets/register-illustration.png";
+import { registrar } from "../services/authService";
 
 export default function Registro(){
 
     const [nome, setNome] = useState("");
     const [email, setEmail] = useState("");
     const [senha, setSenha] = useState("");
+    const [erro, setErro] = useState("");
 
     const navigate = useNavigate();
 
-    function handleSubmit(event) {
+    async function handleSubmit(event) {
         event.preventDefault();
-
-        // validacao registro
-
-        navigate("/login");
+        setErro("");
+        try {
+            await registrar(email, nome, senha);
+            navigate("/login");
+        } catch (e) {
+            setErro(e.message);
+        }
     }
 
     return (
@@ -39,6 +45,9 @@ export default function Registro(){
                             <InputCampo icon={Mail} type="email" placeholder="Insira o email" value={email} onChange={setEmail}/>
                             <InputCampo icon={Lock} type="password" placeholder="Insira a senha" value={senha} onChange={setSenha}/>
                         </div>
+                        {erro && (
+                            <p className="mt-3 text-sm text-red-500">{erro}</p>
+                        )}
                         <div className="flex justify-center mt-36">
                             <button
                                 type="submit"

@@ -19,7 +19,7 @@ export default function MinhaArea() {
   const datasets = [
     {
       id: 1,
-      nome: "human-vs-ai text",
+      nome_dataset: "human-vs-ai text",
       descricao:
         "Dataset com samples de textos escritos por humano ou gerados por IAs generativas.",
       autor: "renatjfa",
