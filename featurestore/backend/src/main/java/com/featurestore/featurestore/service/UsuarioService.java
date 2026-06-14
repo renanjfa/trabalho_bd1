@@ -56,10 +56,10 @@ public class UsuarioService {
         }
     }
     public List<Dataset> getMeuDatasets(String email)throws Exception{
-        Usuario usuario = new Usuario();
-        usuario.setEmail(email);
         try (DAOFactory daoFactory = DAOFactory.getInstance()) {
             UsuarioDAO dao = daoFactory.getUsuarioDAO();
+            Usuario usuario = new Usuario();
+            usuario.setEmail(email);
             return dao.getMeusDatasets(usuario);
         }
     }
