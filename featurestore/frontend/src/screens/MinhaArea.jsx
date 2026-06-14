@@ -1,5 +1,5 @@
-import React from "react";
-import { useState } from "react";
+import React, {useState, useEffect} from "react";
+import { listarMeusDatasets } from "../services/datasetservice";
 import "./style/MinhaArea.css";
 
 import Header from "../components/Header";
@@ -16,29 +16,22 @@ export default function MinhaArea() {
 
   const [selectedDatasetId, setSelectedDatasetId] = useState(null);
 
-  const datasets = [
-    {
-      id: 1,
-      nome_dataset: "human-vs-ai text",
-      descricao:
-        "Dataset com samples de textos escritos por humano ou gerados por IAs generativas.",
-      autor: "renatjfa",
-    },
-    {
-      id: 2,
-      nome: "brasileirao-2025",
-      descricao:
-        "Dados e estatísticas Brasileirão 2025, gols, jogos, confrontos, cartões, dados ...",
-      autor: "jtorres",
-    },
-    {
-      id: 3,
-      nome: "human-vs-ai text",
-      descricao:
-        "Dataset com samples de textos escritos por humano ou gerados por IAs generativas.",
-      autor: "renatjfa",
-    },
-  ];
+  const [datasets, setDatasets] = useState([]);
+  const [datasetParaVersao, setdatasetParaVersao] = useState(null);
+
+  useEffect(()=>{
+    carregarDatasets();
+  },[]);
+
+  async function carregarDatasets() {
+      try {
+          const data = await listarMeusDatasets();
+          setDatasets(data);
+      } catch (e) {
+          console.error(e.message);
+      }
+  }
+  const datasetSelecionado = datasets.find(d => d.id === selectedDatasetId);
 
   return (
     <div className="container">
@@ -55,7 +48,8 @@ export default function MinhaArea() {
         <AdicionarDatasetPopUp
             aberto={popupDatasetAberto}
             onClose={() => setPopupDatasetAberto(false)}
-            onAbrirVersao={() => {
+            onDatasetCriado={(novoDataset) => {
+                setdatasetParaVersao(novoDataset)
                 setPopupDatasetAberto(false);
                 setPopupVersaoAberto(true);
             }}
@@ -63,6 +57,7 @@ export default function MinhaArea() {
 
         <CriarVersaoPopUp
             aberto={popupVersaoAberto}
+            idDataset={datasetParaVersao?.id}
             onClose={() => {
                 setPopupVersaoAberto(false);
                 setPopupDatasetAberto(false);
@@ -71,14 +66,13 @@ export default function MinhaArea() {
                 setPopupVersaoAberto(false);
                 setPopupDatasetAberto(true);
             }}
-            onSubmit={(novaVersao) => {
-                console.log(novaVersao);
+            onSubmit={() => {
                 setPopupVersaoAberto(false);
-                setPopupDatasetAberto(true);
-            }}
+                carregarDatasets();
+              }}
         />
 
-        <DetalhesDataset/>
+        <DetalhesDataset dataset={datasetSelecionado}/>
 
       </div>
 
