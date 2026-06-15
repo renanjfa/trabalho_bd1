@@ -60,7 +60,7 @@ export default function CriarVersaoPopUp({aberto, onClose, onSubmit, onBack, idD
                 <div className="mb-5 flex items-center justify-between">
                     <div>
                         <h2 className="text-sm font bold text-black">
-                            Adicione uma versao nova
+                            Adicione uma Versão Nova
                         </h2>
                         <div className="mt-1 h-[2px] w-24 bg-[#ef4b2d]"/>
                     </div>
@@ -71,7 +71,7 @@ export default function CriarVersaoPopUp({aberto, onClose, onSubmit, onBack, idD
                 <form onSubmit={handleSubmit} className="border border-gray-300 px-4 py-5">
                     <div className="mb-4">
                         <label className="mb-2 block text-xs font-bold text-black">
-                            Titulo
+                            Título
                         </label>
                         <input type="text" value={titulo} onChange={(event)=> setTitulo(event.target.value)}
                             className="h-8 w-full max-w-md rounded border border-gray-300 px-2 text-sm outline-none focus:border-[#ff5a4f]"/>
@@ -79,7 +79,7 @@ export default function CriarVersaoPopUp({aberto, onClose, onSubmit, onBack, idD
 
                     <div className="mb-4">
                         <label className="mb-2 block text-xs font-bold text-black">
-                            Descricao
+                            Descrição
                         </label>
                         <textarea value={descricao} onChange={(event) => setDescricao(event.target.value)}
                             className="h-20 w-full max-w-md resize-none rounded border border-gray-300 px-2 py-2 text-sm outline-none focus:border-[#ef4b2d]"/>
@@ -104,7 +104,7 @@ export default function CriarVersaoPopUp({aberto, onClose, onSubmit, onBack, idD
                             ))}
                         </div>
                         <button type="button" onClick={adicionarFeature} className="mt-2 rounded border border-gray-400 px-2 py-1 text-xs text-black hover:bg-gray-100">
-                            Adiconar feature +
+                            Adicionar Feature +
                         </button>
                     </div>
                     <div className="mb-6">
@@ -114,19 +114,19 @@ export default function CriarVersaoPopUp({aberto, onClose, onSubmit, onBack, idD
                         <label onDragOver={(event)=> event.preventDefault()} onDrop={handleDrop} className="flex h-28 w-36 cursor-pointer flex-col items-center justify-center rounded border border-gray-300 bg-white text-center hover:bg-gray-50">
                             <UploadCloud size={28} className="mb-2 text-gray-400"/>
                             <span className="text-[10px] text-gray-400">
-                                Clicke ou arraste aqui
+                                Clique ou Arraste aqui
                             </span>
                             <span className="my-1 text-[10px] text-gray-400">
                                 ou
                             </span>
                             <span className="rounded border border-gray-300 px-3 py-1 text-[10px] text-gray-500">
-                                selecione
+                                Selecione
                             </span>
                             <input type="file" accept=".csv" className="hidden" onChange={(event)=> setArquivoCsv(event.target.files[0])}/>
                         </label>
                         {arquivoCsv && (
                             <p className="mt-2 text-xs text-gray-500">
-                                Arquivo selecionado: {arquivoCsv.name}
+                                Arquivo Selecionado: {arquivoCsv.name}
                             </p>
                         )}
                     </div>

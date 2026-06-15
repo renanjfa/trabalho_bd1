@@ -43,7 +43,7 @@ export default function AdicionarDataset({aberto, onClose, onDatasetCriado}){
                 <div className="mb-5 flex items-center justify-between">
                     <div>
                         <h2 className="text-sm font bold text-black">
-                            Adicione um novo dataset
+                            Adicione um Novo Dataset
                         </h2>
                         <div className="mt-1 h-[2px] w-20 bg-[#ff5a4f]"/>
                     </div>
@@ -54,7 +54,7 @@ export default function AdicionarDataset({aberto, onClose, onDatasetCriado}){
                 <form onSubmit={handleSubmit} className="border border-gray-300 px-4 py-4">
                     <div className="mb-4">
                         <label className="mb-2 block text-xs font-bold text-black">
-                            Titulo
+                            Título
                         </label>
                         <input type="text" value={titulo} onChange={(event)=> setTitulo(event.target.value)}
                             className="h-8 w-full max-w-md rounded border border-gray-300 px-2 text-sm outline-none focus:border-[#ff5a4f]"/>
@@ -77,12 +77,12 @@ export default function AdicionarDataset({aberto, onClose, onDatasetCriado}){
                             ))}
                         </div>
                         <button type="button" onClick={adicionarFonte} className="mt-2 rounded border-gray-400 px-2 py-1 text-xs text-black hover:bg-gray-100">
-                            Adicionar fonte +
+                            Adicionar Fonte +
                         </button>
                     </div>
                     <div className="mb-4">
                         <label className="mb-2 block text-xs font-bold text-black">
-                            Descricao
+                            Descrição
                         </label>
                         <textarea value={descricao} onChange={(event)=> setDescricao(event.target.value)}
                             className="h-32 w-full max-w-md resize-none rounded border border-gray-300 px-2 py-2 text-sm outline-none focus:border-[#ff5a4f]"/>
@@ -90,7 +90,7 @@ export default function AdicionarDataset({aberto, onClose, onDatasetCriado}){
 
                     {erro && <p className="mt-2 text-sm text-red-500">{erro}</p>}
                     <button type="submit"  className="rounded bg-[#ef4b2d] px-7 py-2 text-xs font-bold text-white hover:bg-[#d93f24]">
-                        Criar versao original
+                        Criar Versão Original
                     </button>
                 </form>
             </div>
