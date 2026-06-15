@@ -2,7 +2,7 @@ import { useState } from "react";
 import {UploadCloud, ArrowLeft, X} from "lucide-react";
 import { criarVersao } from "../services/versaoService";
 
-export default function CriarVersaoPopUp({aberto, onClose, onSubmit, onBack, idDataset}){
+export default function CriarVersaoPopUp({aberto, onClose, onSubmit, onBack, idDataset, idVersaoBase}){
     const [titulo, setTitulo]= useState("");
     const [descricao, setDescricao]= useState("");
     const [idVersaoBase, setIdVersaoBase]= useState(null);
