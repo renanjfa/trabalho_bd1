@@ -13,7 +13,7 @@ function App() {
       <Route path="/login" element={<Login />} />
       <Route path="/minha-area" element={<MinhaArea />} />
       <Route path="/datasets" element={<Datasets />} />
-      <Route path="/dataset-page" element={<DatasetPage />} />
+      <Route path="/dataset-page/:id" element={<DatasetPage />} />
     </Routes>
   );
 }

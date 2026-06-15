@@ -39,6 +39,8 @@ public class VersaoService {
                 }
             }else{
                 if (descricao != null && !descricao.isBlank()) {
+                    versaoDAO.insertWithoutVersaoBase(versao);
+                }else{
                     versaoDAO.insertWithoutDescricaoAndVersaoBase(versao);
                 }
             }
@@ -60,7 +62,7 @@ public class VersaoService {
             return dao.getByIdDataset(idDataset);
         }
     }
-    public List<Versao> listarPosirUsuario(String emailUsuario) throws Exception{
+    public List<Versao> listarPorUsuario(String emailUsuario) throws Exception{
         try(DAOFactory daoFactory = DAOFactory.getInstance()){
             VersaoDAO dao = daoFactory.getVersaoDAO();
             return dao.getByEmailUsuario(emailUsuario);

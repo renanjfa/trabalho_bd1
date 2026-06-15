@@ -1,34 +1,50 @@
 import React from "react";
 import "./style/VersaoDetalhes.css";
 
-export default function VersaoDetalhes({ onCriarVersao }) {
-    
+export default function VersaoDetalhes({ versao, onCriarVersao }) {
+    if (!versao) {
+        return (
+            <section className="details">
+                <p>Selecione uma versão para ver os detalhes.</p>
+            </section>
+        );
+    }
     return (
         <section className="details">
 
-            {/* OBS: RECEBER TITULO DO BANCO */}
             <div>
-                <strong className="titulo-dataset" >versao3</strong>
+                <strong className="titulo-dataset" >{versao.nome_versao}</strong>
             </div>
 
             {/* OBS: RECEBER AUTOR e CREATED ON DO BANCO */}
             <div className="gap-author-data">
                 <p className="autor-nome">
-                    <strong className="created">Autor:</strong> jjtorres
+                    <strong className="created">Autor:</strong> {versao.email_usuario}
                 </p>
 
                 <p className="created">
-                    <strong>Criado em: </strong>20/06/2023
+                    <strong>Criado em: </strong>{versao.data}
                 </p>
 
-                <p className="created">
-                    <strong>Baseado na versao: </strong>versao1
-                </p>
+                {versao.id_versao_base && (
+                    <p className="created">
+                        <strong>Baseado na versão: </strong>{versao.id_versao_base}
+                    </p>
+                )}
             </div>
 
             {/* OBS: RECEBER DESCRICAO e FONTES DO BANCO */}
             <div className="gap-descricao-fontes">
                 <h3>Tabela Features</h3>
+                {versao.features && versao.features.length > 0 ? (
+                    <ul>
+                        {versao.features.map((f) => (
+                            <li key={f.id_feature}>{f.nome_feature} - {f.tipo}</li>
+                        ))}
+                    </ul>
+                ) : (
+                    <p>Nenhuma feature</p>
+                )}
 
                 
             </div>

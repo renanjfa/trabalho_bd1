@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { ArrowLeft, X } from "lucide-react";
+import { criarDatasets } from "../services/datasetservice";
 
-export default function AdicionarDataset({aberto, onClose, onAbrirVersao}){
+export default function AdicionarDataset({aberto, onClose, onDatasetCriado}){
     const [titulo, setTitulo]= useState("");
     const [fontes, setFontes]= useState([""]);
     const [descricao, setDescricao]= useState("");
@@ -24,17 +25,15 @@ export default function AdicionarDataset({aberto, onClose, onAbrirVersao}){
     function handleSubmit(event){
         event.preventDefault();
 
-        const novoDataset = {
-            titulo,
-            fontes,
-            descricao,
-        };
-
-        setTitulo("");
-        setFontes([""]);
-        setDescricao("");
-
-        onAbrirVersao();
+        try{
+            const resultado = await criarDatasets(titulo, descricao, fontes);
+            setTitulo("");
+            setFontes([""]);
+            setDescricao("");
+            onDatasetCriado(resultado);
+        }catch (e){
+            console.error(e.message);
+        }
     }
 
     return(

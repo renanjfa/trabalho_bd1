@@ -2,9 +2,13 @@ package com.featurestore.featurestore.controller;
 
 import com.featurestore.featurestore.service.UsuarioService;
 import com.featurestore.featurestore.models.Usuario;
-import org.springframework.http.RequestEntity;
+import com.featurestore.featurestore.models.Dataset;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import jakarta.servlet.http.HttpServletRequest;
+
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -34,6 +38,17 @@ public class LoginController {
             return ResponseEntity.ok(Map.of("token",token));
         }catch(Exception e){
             return ResponseEntity.badRequest().body(Map.of("error",e.getMessage()));
+        }
+    }
+
+    @GetMapping("/meus-datasets")
+    public ResponseEntity<?> meusDatasets(HttpServletRequest request){
+        try{
+            String email = (String) request.getAttribute("emailUsuario");
+            List<Dataset> datasets = usuarioService.getMeuDatasets(email);
+            return ResponseEntity.ok(datasets);
+        }catch (Exception e){
+            return ResponseEntity.badRequest().body(Map.of("error", e.getMessage()));
         }
     }
 

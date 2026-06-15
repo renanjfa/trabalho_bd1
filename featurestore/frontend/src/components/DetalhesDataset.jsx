@@ -2,48 +2,50 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import "./style/DetalhesDataset.css";
 
-export default function DetalhesDataset() {
+export default function DetalhesDataset({dataset}) {
 
     const navigate = useNavigate();
 
+    if(!dataset){
+            return(
+                <section className="datails">
+                    <p>Selecione um dataset para ver os detalhes</p>
+                </section>
+            );
+        }
     return(
+        
         <section className="details">
 
-            {/* OBS: RECEBER TITULO DO BANCO */}
             <div>
-                <strong className="titulo-dataset" >brasileirao-2025</strong>
+                <strong className="titulo-dataset">{dataset.nome_dataset}</strong>
             </div>
 
-            {/* OBS: RECEBER AUTOR e CREATED ON DO BANCO */}
             <div className="gap-author-data">
                 <p className="autor-nome">
-                    <strong className="created">Autor:</strong> jjtorres
+                    <strong className="created">Autor:</strong>{dataset.email_usuario}
                 </p>
 
                 <p className="created">
-                    <strong>Criado em: </strong>20/06/2023
+                    <strong>Criado em: </strong>{dataset.data}
                 </p>
             </div>
 
-            {/* OBS: RECEBER DESCRICAO e FONTES DO BANCO */}
             <div className="gap-descricao-fontes">
                 <h3>Descrição:</h3>
 
                 <p className="descricao-text" >
-                    Dados e estatísticas do Campeonato Brasileiro
-                    2025 contendo gols, jogos, confrontos,
-                    cartões, classificação e demais informaçõesKAJSDHA.
+                    {dataset.descricao}
                 </p>
 
                 <h3>Fontes:</h3>
 
                 <p className="descricao-text">
-                    Kaggle, Globoplay, UOL, SBT, Premiere
+                    {dataset.fontes ? dataset.fontes.join(", ") : "Nenhuma fonte"}
                 </p>
             </div>
 
-            {/* OBS:  */}
-            <button className="versions-btn" onClick={() => navigate("/dataset-page")}>
+            <button className="versions-btn" onClick={() => navigate("/dataset-page/" + dataset.id)}>
                 Inspecionar Versões
             </button>
 
