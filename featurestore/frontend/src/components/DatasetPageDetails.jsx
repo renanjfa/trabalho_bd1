@@ -25,8 +25,8 @@ export default function DatasetPageDetails({dataset}) {
 
             <div className="divAutor">
                 <p className="metadata">Autor: {dataset.email_usuario}</p>
-                <p className="metadata">Criado em: {dataset.data}</p>
-                <p className="metadata">Hora: {dataset.hora}</p>
+                <p className="metadata">Criado em: {new Date(dataset.data).toLocaleDateString("pt-BR")}</p>
+                <p className="metadata">Hora: {dataset.hora?.slice(0, 5)}</p>
             </div>
 
             <section className="info-section">

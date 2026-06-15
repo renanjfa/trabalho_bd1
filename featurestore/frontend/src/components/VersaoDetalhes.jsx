@@ -23,10 +23,10 @@ export default function VersaoDetalhes({ versao, onCriarVersao }) {
                 </p>
 
                 <p className="created">
-                    <strong>Criado em: </strong>{versao.data}
+                    <strong>Criado em: </strong>{new Date(versao.data).toLocaleDateString("pt-BR")}
                 </p>
 
-                {versao.id_versao_base && (
+                {versao.id_versao_base != null && versao.id_versao_base !== 0 && (
                     <p className="created">
                         <strong>Baseado na versão: </strong>{versao.id_versao_base}
                     </p>
@@ -34,13 +34,35 @@ export default function VersaoDetalhes({ versao, onCriarVersao }) {
             </div>
 
             <div className="gap-descricao-fontes">
+                <h3>Descrição</h3>
+                <p className="descricao-text" >
+                    {versao.descricao}
+                </p>
+
                 <h3>Tabela Features</h3>
+
                 {versao.features && versao.features.length > 0 ? (
-                    <ul>
-                        {versao.features.map((f) => (
-                            <li key={f.id_feature}>{f.nome_feature} - {f.tipo}</li>
-                        ))}
-                    </ul>
+                    <div className="features-table-container">
+                        <table className="features-table">
+                            <thead>
+                                <tr>
+                                    <th>Nome</th>
+                                    <th>Tipo</th>
+                                    <th>Descrição</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                {versao.features.map((f) => (
+                                    <tr key={f.id_feature}>
+                                        <td>{f.nome_feature}</td>
+                                        <td>{f.tipo}</td>
+                                        <td>{f.descricao}</td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
                 ) : (
                     <p>Nenhuma feature</p>
                 )}

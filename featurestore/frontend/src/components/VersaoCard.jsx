@@ -18,7 +18,7 @@ export default function VersaoCard({ versao, onClick, selected }) {
                 </small>
 
                 <small className="data-created">
-                {versao.data}
+                {new Date(versao.data).toLocaleDateString("pt-BR")}
                 </small>
             </div>
         </button>

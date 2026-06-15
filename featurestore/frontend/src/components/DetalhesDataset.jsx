@@ -8,8 +8,8 @@ export default function DetalhesDataset({dataset}) {
 
     if(!dataset){
             return(
-                <section className="datails">
-                    <p>Selecione um dataset para ver os detalhes</p>
+                <section className="details">
+                    <p>Selecione um dataset para ver os detalhes!</p>
                 </section>
             );
         }
@@ -23,11 +23,11 @@ export default function DetalhesDataset({dataset}) {
 
             <div className="gap-author-data">
                 <p className="autor-nome">
-                    <strong className="created">Autor:</strong>{dataset.email_usuario}
+                    <strong className="created">Autor: </strong>{dataset.email_usuario}
                 </p>
 
                 <p className="created">
-                    <strong>Criado em: </strong>{dataset.data}
+                    <strong>Criado em: </strong>{new Date(dataset.data).toLocaleDateString("pt-BR")}
                 </p>
             </div>
 
