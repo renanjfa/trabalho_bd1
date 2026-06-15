@@ -1,7 +1,8 @@
 import { useState } from "react";
 import {UploadCloud, ArrowLeft, X} from "lucide-react";
+import { criarVersao } from "../services/versaoService";
 
-export default function CriarVersaoPopUp({aberto, onClose, onSubmit, onBack}){
+export default function CriarVersaoPopUp({aberto, onClose, onSubmit, onBack, idDataset}){
     const [titulo, setTitulo]= useState("");
     const [features, setFeatures]= useState([
         {nome: "", descricao: "" },
@@ -34,19 +35,22 @@ export default function CriarVersaoPopUp({aberto, onClose, onSubmit, onBack}){
         }
     }
 
-    function handleSubmit(event){
+    async function handleSubmit(event){
         event.preventDefault();
-
-        const novaVersao={
-            titulo,
-            features,
-            arquivoCsv,
-        };
-        onSubmit(novaVersao);
-        setTitulo("");
-        setFeatures([{nome: "", descricao: ""}]);
-        setArquivoCsv(null);
-        onClose();
+        try {
+            const featuresParaEnviar = features.map(f => ({
+                nome_feature: f.nome,
+                tipo: f.tipo || "",
+                descricao: f.descricao,
+            }));
+            await criarVersao(idDataset, titulo, null, null, null, featuresParaEnviar);
+            setTitulo("");
+            setFeatures([{nome: "", descricao: ""}]);
+            setArquivoCsv(null);
+            onSubmit();
+        } catch (e) {
+            console.error(e.message);
+        }
     }
 
     return(
