@@ -28,9 +28,10 @@ public class PgDatasetDAO implements DatasetDAO {
                                 "VALUES (?, ?, ?, ?);";
 
     private static final String READ_QUERY =
-                                "SELECT nome_dataset, descricao, data, hora, email_usuario " +
-                                "FROM featurestore.data_set " +
-                                "WHERE id = ?;";
+                                "SELECT ds.nome_dataset, ds.descricao, ds.data, ds.hora, ds.email_usuario, u.nome_usuario " +
+                                "FROM featurestore.data_set ds " +
+                                "LEFT JOIN featurestore.usuario u ON ds.email_usuario = u.email " +
+                                "WHERE ds.id = ?;";
                             
     private static final String UPDATE_NOME_DESC_USER_QUERY =
                                 "UPDATE featurestore.data_set " +
@@ -47,8 +48,10 @@ public class PgDatasetDAO implements DatasetDAO {
                                 "WHERE id = ?;";
 
     private static final String ALL_QUERY = 
-                                "SELECT id, nome_dataset, descricao, data, hora, email_usuario " +
-                                "FROM featurestore.data_set;";
+                                "SELECT ds.id, ds.nome_dataset, ds.descricao, ds.data, ds.hora, ds.email_usuario, u.nome_usuario " +
+                                "FROM featurestore.data_set ds " +
+                                "LEFT JOIN featurestore.usuario u " +
+                                "    ON ds.email_usuario = u.email;";
 
     private static final String INSERT_FONTE_QUERY = 
                                 "INSERT INTO featurestore.dataset_possui_fontes (id_dataset, fonte) " +
@@ -132,6 +135,7 @@ public class PgDatasetDAO implements DatasetDAO {
                     data.setData(result.getDate("data"));
                     data.setHora(result.getTime("hora"));
                     data.setEmailUsuario(result.getString("email_usuario"));
+                    data.setNomeUsuario(result.getString("nome_usuario"));
                     data.setFontes(getFontesDataset(id));
 
                 } else {
@@ -239,6 +243,7 @@ public class PgDatasetDAO implements DatasetDAO {
                 data.setData(result.getDate("data"));
                 data.setHora(result.getTime("hora"));
                 data.setEmailUsuario(result.getString("email_usuario"));
+                data.setNomeUsuario(result.getString("nome_usuario"));
                 data.setFontes(getFontesDataset(data.getId()));
 
                 datasetList.add(data);

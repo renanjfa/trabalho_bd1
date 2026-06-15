@@ -13,7 +13,13 @@ export default function DatasetCard({ dataset, onClick, selected }) {
 
             <small className="autor">
                 <strong>Autor: </strong>
-                <span className="nome-autor">{dataset.email_usuario}</span>
+
+                {dataset.nome_usuario != null ? (
+
+                    <span className="nome-autor">{dataset.nome_usuario}</span>
+                ) : (
+                    <span className="nome-autor">nome de usuario nulo</span>
+                )}
             </small>
         </button>
     )
