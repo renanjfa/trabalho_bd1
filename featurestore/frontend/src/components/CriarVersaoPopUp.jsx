@@ -30,14 +30,33 @@ export default function CriarVersaoPopUp({aberto, onClose, onSubmit, onBack, idD
 
     function handleDrop(event){
         event.preventDefault();
-        const arquivo= event.dataTransfer.files[0];
-        if(arquivo){
+
+        const arquivo = event.dataTransfer.files[0];
+
+        if (validarCsv(arquivo)) {
             setArquivoCsv(arquivo);
         }
     }
 
+    function validarCsv(arquivo) {
+        if (!arquivo) return false;
+
+        const ehCsv = arquivo.name.toLowerCase().endsWith(".csv") || arquivo.type === "text/csv";
+
+        if (!ehCsv) {
+            alert("Apenas arquivos CSV são permitidos.");
+            return false;
+        }
+
+        return true;
+    }
+
     async function handleSubmit(event){
         event.preventDefault();
+
+        if (arquivoCsv && !validarCsv(arquivoCsv)) 
+            return;
+
         try {
             const featuresParaEnviar = features.map(f => ({
                 nome_feature: f.nome,
@@ -137,7 +156,15 @@ export default function CriarVersaoPopUp({aberto, onClose, onSubmit, onBack, idD
                             <span className="rounded border border-gray-300 px-3 py-1 text-[10px] text-gray-500">
                                 Selecione
                             </span>
-                            <input type="file" accept=".csv" className="hidden" onChange={(event)=> setArquivoCsv(event.target.files[0])}/>
+                            <input type="file" accept=".csv" className="hidden" onChange={(event) => {
+                                                                                                        const arquivo = event.target.files[0];
+
+                                                                                                        if (validarCsv(arquivo)) {
+                                                                                                            setArquivoCsv(arquivo);
+                                                                                                        }
+
+                                                                                                        event.target.value = "";
+                                                                                                    }}/>
                         </label>
                         {arquivoCsv && (
                             <p className="mt-2 text-xs text-gray-500">
