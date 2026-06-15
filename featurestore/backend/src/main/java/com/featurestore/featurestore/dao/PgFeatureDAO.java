@@ -21,7 +21,7 @@ public class PgFeatureDAO implements FeatureDAO {
 
     private static final String CREATE_QUERY =
                                 "INSERT INTO featurestore.feature (nome_feature, tipo, descricao) " +
-                                "VALUES (?, ?, ?);";
+                                "VALUES (?, ?, ?) RETURNING id_feature;";
 
     private static final String INSERT_WITHOUT_DESC_QUERY =
                                 "INSERT INTO featurestore.feature (nome_feature, tipo) " +
@@ -58,7 +58,11 @@ public class PgFeatureDAO implements FeatureDAO {
             statement.setString(2, ft.getTipo());
             statement.setString(3, ft.getDescricao());
 
-            statement.executeUpdate();
+            try (ResultSet result = statement.executeQuery()) {
+                if (result.next()) {
+                    ft.setId(result.getInt("id_feature"));
+                }
+            }
 
         } catch (SQLException ex)  {
             Logger.getLogger(PgFeatureDAO.class.getName()).log(Level.SEVERE, "DAO", ex);
