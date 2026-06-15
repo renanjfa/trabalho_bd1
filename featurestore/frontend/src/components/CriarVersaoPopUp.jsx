@@ -5,7 +5,6 @@ import { criarVersao } from "../services/versaoService";
 export default function CriarVersaoPopUp({aberto, onClose, onSubmit, onBack, idDataset, idVersaoBase}){
     const [titulo, setTitulo]= useState("");
     const [descricao, setDescricao]= useState("");
-    const [idVersaoBase, setIdVersaoBase]= useState(null);
     const [features, setFeatures]= useState([
         {nome: "",tipo: "", descricao: "" },
     ]);
@@ -126,7 +125,7 @@ export default function CriarVersaoPopUp({aberto, onClose, onSubmit, onBack, idD
                             <input type="file" accept=".csv" className="hidden" onChange={(event)=> setArquivoCsv(event.target.files[0])}/>
                         </label>
                         {arquivoCsv && (
-                            <p className="mt-2 text-xs text-gray-500}">
+                            <p className="mt-2 text-xs text-gray-500">
                                 Arquivo selecionado: {arquivoCsv.name}
                             </p>
                         )}

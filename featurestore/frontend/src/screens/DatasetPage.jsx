@@ -26,8 +26,8 @@ export default function DatasetPage() {
     async function carregarDados() {
         try {
             const ds = await buscarDatasets(id);
-            setDataset(ds);
-            const vs = await listarVersoesPorDataset(id);
+            setDatasets(ds);
+            const vs = await listarVersoesPorDataSet(id);
             setVersoes(vs);
         } catch (e) {
             console.error(e.message);
