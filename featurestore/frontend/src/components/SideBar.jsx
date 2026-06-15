@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import "./style/SideBar.css";
+import { logout } from "../services/authService";
 
 import { CircleUser, LogOut, LayoutDashboard, Database, BookMarked, UserPen } from 'lucide-react';
 
@@ -40,10 +41,10 @@ export default function SideBar({ activeSection }) {
           </nav>
 
 
-          {/* OBS: FUNCIONALIDADE LOGOUT */}
-          <button className="logout" onClick={() => navigate("/login")}>
-            <LogOut/>
+          <button className="logout" onClick={()=>{logout(); navigate("/login");}}>
+              <LogOut/>
           </button>
+          
 
         </aside>
     )

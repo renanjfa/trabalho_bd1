@@ -22,7 +22,7 @@ export default function AdicionarDataset({aberto, onClose, onDatasetCriado}){
         const novasFontes= fontes.filter((_,i)=>i!==index);
         setFontes(novasFontes);
     }
-    function handleSubmit(event){
+    async function handleSubmit(event){
         event.preventDefault();
 
         try{

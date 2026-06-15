@@ -17,6 +17,7 @@ export default function DatasetPage() {
     const [versoes, setVersoes]= useState([]);
     const [popupVersaoAberto, setPopupVersaoAberto] = useState(false);
     const [selectedVersaoId, setSelectedVersaoId] = useState(null);
+    const [versaoBaseId, setVersaoBaseId]= useState(null);
 
     useEffect(() => {
         carregarDados();
@@ -25,8 +26,8 @@ export default function DatasetPage() {
     async function carregarDados() {
         try {
             const ds = await buscarDatasets(id);
-            setDataset(ds);
-            const vs = await listarVersoesPorDataset(id);
+            setDatasets(ds);
+            const vs = await listarVersoesPorDataSet(id);
             setVersoes(vs);
         } catch (e) {
             console.error(e.message);
@@ -45,11 +46,12 @@ export default function DatasetPage() {
 
                 <ListaVersoes versoes={versoes} selectedVersaoId={selectedVersaoId} onSelectVersao={setSelectedVersaoId}/>
 
-                <VersaoDetalhes versao={versaoSelecionada} onCriarVersao={() => setPopupVersaoAberto(true)}/>
+                <VersaoDetalhes versao={versaoSelecionada} onCriarVersao={(idVersao) => {setVersaoBaseId(idVersao); setPopupVersaoAberto(true);}}/>
 
                 <CriarVersaoPopUp
                     aberto={popupVersaoAberto}
                     idDataset= {parseInt(id)}
+                    idVersaoBase={versaoBaseId}
                     onClose={() => setPopupVersaoAberto(false)}
                     onBack={() => setPopupVersaoAberto(false)}
                     onSubmit={(novaVersao) => {
