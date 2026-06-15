@@ -87,7 +87,7 @@ export default function AdicionarDataset({aberto, onClose, onDatasetCriado}){
                             className="h-32 w-full max-w-md resize-none rounded border border-gray-300 px-2 py-2 text-sm outline-none focus:border-[#ff5a4f]"/>
                     </div>
 
-                    <button type="submit" className="rounded bg-[#ef4b2d] px-7 py-2 text-xs font-bold text-white hover:bg-[#d93f24]">
+                    <button type="submit"  className="rounded bg-[#ef4b2d] px-7 py-2 text-xs font-bold text-white hover:bg-[#d93f24]">
                         Criar versao original
                     </button>
                 </form>
