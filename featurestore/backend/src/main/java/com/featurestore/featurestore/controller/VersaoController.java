@@ -58,4 +58,19 @@ public class VersaoController {
             return ResponseEntity.badRequest().body(Map.of("error", e.getMessage()));
         }
     }
+
+    @GetMapping("/{id}/download")
+    public ResponseEntity<?> download(@PathVariable Integer id){
+        try{
+            Versao versao = versaoService.buscaPorId(id);
+            String csv = versao.getCSV();
+            if(csv == null || csv.isBlank()){
+                return ResponseEntity.badRequest().body(Map.of("error","Versao nao possui arquivo CSV"));
+            }
+            return ResponseEntity.ok().header("Content-Type", "text/csv").header("Content-Disposition", "attachment;filename=\"" + versao.getNome() + ".csv\"").body(csv);
+        }catch (Exception e){
+            return ResponseEntity.badRequest().body(Map.of("error",e.getMessage()));
+        }
+    }
+    
 }

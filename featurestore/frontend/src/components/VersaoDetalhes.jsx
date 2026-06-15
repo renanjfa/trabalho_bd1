@@ -1,5 +1,6 @@
 import React from "react";
 import "./style/VersaoDetalhes.css";
+import { downloadVersao } from "../services/versaoService";
 
 export default function VersaoDetalhes({ versao, onCriarVersao }) {
     if (!versao) {
@@ -74,7 +75,13 @@ export default function VersaoDetalhes({ versao, onCriarVersao }) {
             {/* OBS:  */}
             <div>
 
-                <button className="versions-btn">
+                <button className="versions-btn" onClick={async ()=> {
+                    try{
+                        await downloadVersao(versao.id_versao);
+                    }catch (e){
+                        console.error(e.message);
+                    }
+                }}>
                     Baixar Versao
                 </button>
                 <span>
