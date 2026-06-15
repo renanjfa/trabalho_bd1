@@ -17,7 +17,10 @@
 
 .content {
   display: flex;
+  flex-direction: row;
+  align-items: stretch;
   gap: 20px;
+  width: 100%;
   padding-top: 30px;
   padding-bottom: 0%;
 }
