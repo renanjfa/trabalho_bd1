@@ -21,19 +21,19 @@ public class PgVersaoDAO implements VersaoDAO {
 
     private static final String CREATE_QUERY =
                                 "INSERT INTO featurestore.versao (email_usuario, id_dataset, data, hora, csv, nome_versao, descricao, id_versao_base) " +
-                                "VALUES ( ?, ?, ?, ?, ?, ?, ?, ?); ";
+                                "VALUES ( ?, ?, ?, ?, ?, ?, ?, ?) RETURNING id_versao; ";
 
     private static final String INSERT_WITHOUT_VERSAO_BASE_QUERY =
                                 "INSERT INTO featurestore.versao (email_usuario, id_dataset, data, hora, csv, nome_versao, descricao) " +
-                                "VALUES ( ?, ?, ?, ?, ?, ?, ?); ";
+                                "VALUES ( ?, ?, ?, ?, ?, ?, ?) RETURNING id_versao; ";
 
     private static final String INSERT_WITHOUT_DESCRICAO_QUERY =
                                 "INSERT INTO featurestore.versao (email_usuario, id_dataset, data, hora, csv, nome_versao, id_versao_base) " +
-                                "VALUES ( ?, ?, ?, ?, ?, ?, ?); ";
+                                "VALUES ( ?, ?, ?, ?, ?, ?, ?) RETURNING id_versao; ";
 
     private static final String INSERT_WITHOUT_DESCRICAO_AND_VERSAO_BASE_QUERY =
                                 "INSERT INTO featurestore.versao (email_usuario, id_dataset, data, hora, csv, nome_versao) " +
-                                "VALUES ( ?, ?, ?, ?, ?, ?); ";
+                                "VALUES ( ?, ?, ?, ?, ?, ?) RETURNING id_versao; ";
 
     private static final String READ_QUERY =
                                 "SELECT id_versao, email_usuario, id_dataset, data, hora, csv, nome_versao, descricao, id_versao_base " +
@@ -85,7 +85,11 @@ public class PgVersaoDAO implements VersaoDAO {
             statement.setString(7, v.getDescricao());
             statement.setInt(8, v.getIdVersaoBase());
 
-            statement.executeUpdate();
+            try (ResultSet result = statement.executeQuery()) {
+                if (result.next()) {
+                    v.setId(result.getInt("id_versao"));
+                }
+            }
 
         } catch (SQLException ex) {
             Logger.getLogger(PgVersaoDAO.class.getName()).log(Level.SEVERE, "DAO", ex);
@@ -113,7 +117,11 @@ public class PgVersaoDAO implements VersaoDAO {
             statement.setString(6, v.getNome());
             statement.setString(7, v.getDescricao());
 
-            statement.executeUpdate();
+            try (ResultSet result = statement.executeQuery()) {
+                if (result.next()) {
+                    v.setId(result.getInt("id_versao"));
+                }
+            }
 
         } catch (SQLException ex) {
             Logger.getLogger(PgVersaoDAO.class.getName()).log(Level.SEVERE, "DAO", ex);
@@ -134,7 +142,11 @@ public class PgVersaoDAO implements VersaoDAO {
             statement.setString(6, v.getNome());
             statement.setInt(7, v.getIdVersaoBase());
 
-            statement.executeUpdate();
+            try (ResultSet result = statement.executeQuery()) {
+                if (result.next()) {
+                    v.setId(result.getInt("id_versao"));
+                }
+            }
 
         } catch (SQLException ex) {
             Logger.getLogger(PgVersaoDAO.class.getName()).log(Level.SEVERE, "DAO", ex);
@@ -154,7 +166,11 @@ public class PgVersaoDAO implements VersaoDAO {
             statement.setString(5, v.getCSV());
             statement.setString(6, v.getNome());
 
-            statement.executeUpdate();
+            try (ResultSet result = statement.executeQuery()) {
+                if (result.next()) {
+                    v.setId(result.getInt("id_versao"));
+                }
+            }
 
         } catch (SQLException ex) {
             Logger.getLogger(PgVersaoDAO.class.getName()).log(Level.SEVERE, "DAO", ex);
