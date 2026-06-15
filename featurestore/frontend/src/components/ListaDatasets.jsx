@@ -30,7 +30,7 @@ export default function ListaDatasets({ datasets, buttonAdd, section, onAddClick
 
           <input
             type="text"
-            placeholder="Buscar"
+            placeholder="Buscar por nome dataset ou autor"
             className="search"
             value={search}
             onChange={(e) => setSearch(e.target.value)}

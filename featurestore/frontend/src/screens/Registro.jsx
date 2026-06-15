@@ -48,12 +48,20 @@ export default function Registro(){
                         {erro && (
                             <p className="mt-3 text-sm text-red-500">{erro}</p>
                         )}
-                        <div className="flex justify-center mt-36">
+                        <div className="flex flex-col items-center gap-3 mt-36">
                             <button
                                 type="submit"
-                                className="bg-[#ff7f86] text-white text-sm px-8 py-3 rounded hover:bg-[#ff6f77] transition"
+                                className="w-64 bg-[#ff7f86] text-white text-sm py-3 rounded hover:bg-[#ff6f77] transition"
                             >
                                 Registrar
+                            </button>
+
+                            <button
+                                type="button"
+                                onClick={() => navigate("/login")}
+                                className="w-64 text-sm py-3 rounded border border-[#ff7f86] text-[#ff7f86] hover:bg-[#fff0f1] transition"
+                            >
+                                Já possui conta? Faça login
                             </button>
                         </div>
                     </form>

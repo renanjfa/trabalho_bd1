@@ -44,13 +44,28 @@ export default function CriarVersaoPopUp({aberto, onClose, onSubmit, onBack, idD
                 tipo: f.tipo || "",
                 descricao: f.descricao,
             }));
-            await criarVersao(idDataset, titulo, descricao, arquivoCsv?.name || null, idVersaoBase, featuresParaEnviar);
+
+            let conteudoCsv = null;
+
+            if (arquivoCsv) {
+                conteudoCsv = await new Promise((resolve, reject) => {
+                    const reader = new FileReader();
+                    
+                    reader.onload = (e) => resolve(e.target.result);
+                    reader.onerror = (e) => reject(new Error("Erro ao ler o arquivo CSV."));
+                    
+                    reader.readAsText(arquivoCsv);
+                });
+            }
+
+            await criarVersao(idDataset, titulo, descricao, conteudoCsv, idVersaoBase, featuresParaEnviar);
+            
             setTitulo("");
-            setFeatures([{nome: "",tipo: "", descricao: ""}]);
+            setFeatures([{nome: "", tipo: "", descricao: ""}]);
             setArquivoCsv(null);
             onSubmit();
         } catch (e) {
-            console.error(e.message);
+            console.error("Erro ao enviar formulário:", e.message);
         }
     }
 

@@ -23,11 +23,12 @@ export default function DetalhesDataset({dataset}) {
 
             <div className="gap-author-data">
                 <p className="autor-nome">
-                    <strong className="created">Autor: </strong>{dataset.email_usuario}
+                    <strong className="created">Autor: </strong>{dataset.nome_usuario}
                 </p>
 
                 <p className="created">
                     <strong>Criado em: </strong>{new Date(dataset.data).toLocaleDateString("pt-BR")}
+                    <span>, {dataset.hora?.slice(0, 5)}</span>
                 </p>
             </div>
 

@@ -17,6 +17,7 @@ public class Dataset {  // featurestore.data_set
     private Date data;
     private Time hora;
     private String email_usuario;
+    private String nome_usuario;
     private List<String> fontes;    // relacao e tabela = dataset_possui_fontes
 
     
@@ -60,6 +61,7 @@ public class Dataset {  // featurestore.data_set
     public void setHora(Time hora) {
         this.hora = hora;
     }
+
     @JsonProperty("email_usuario")
     public String getEmailUsuario() {
         return this.email_usuario;
@@ -67,6 +69,16 @@ public class Dataset {  // featurestore.data_set
 
     public void setEmailUsuario(String email) {
         this.email_usuario = email;
+    }
+
+    @JsonProperty("nome_usuario")
+    public String getNomeUsuario() {
+        return this.nome_usuario;
+    }
+
+    @JsonProperty("nome_usuario")
+    public void setNomeUsuario(String nome) {
+        this.nome_usuario = nome;
     }
 
     public List<String> getFontes() {

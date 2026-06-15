@@ -19,16 +19,17 @@ export default function VersaoDetalhes({ versao, onCriarVersao }) {
             {/* OBS: RECEBER AUTOR e CREATED ON DO BANCO */}
             <div className="gap-author-data">
                 <p className="autor-nome">
-                    <strong className="created">Autor:</strong> {versao.email_usuario}
+                    <strong className="created">Autor:</strong> {versao.nome_usuario}
                 </p>
 
                 <p className="created">
                     <strong>Criado em: </strong>{new Date(versao.data).toLocaleDateString("pt-BR")}
+                    <span>, {versao.hora?.slice(0, 5)}</span>
                 </p>
 
                 {versao.id_versao_base != null && versao.id_versao_base !== 0 && (
                     <p className="created">
-                        <strong>Baseado na versão: </strong>{versao.id_versao_base}
+                        <strong>Baseado na versão: </strong>{versao.nome_versao_base}
                     </p>
                 )}
             </div>

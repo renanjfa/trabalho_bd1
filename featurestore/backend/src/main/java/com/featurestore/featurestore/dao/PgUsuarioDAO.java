@@ -47,9 +47,11 @@ public class PgUsuarioDAO implements UsuarioDAO {
                                 "FROM featurestore.usuario " +
                                 "WHERE email = ? AND senha = md5(?);";
 
-    private static final String GET_MY_DATASETS_QUERY = 
-                                "SELECT DISTINCT ds.id, ds.nome_dataset, ds.descricao, ds.data, ds.hora, ds.email_usuario " +
+    private static final String GET_MY_DATASETS_QUERY =
+                                "SELECT DISTINCT ds.id, ds.nome_dataset, ds.descricao, ds.data, ds.hora, ds.email_usuario, u.nome_usuario " +
                                 "FROM featurestore.data_set ds " +
+                                "JOIN featurestore.usuario u " +
+                                "    ON u.email = ds.email_usuario " +
                                 "WHERE ds.email_usuario = ? " +
                                 "   OR EXISTS ( " +
                                 "        SELECT 1 " +
@@ -224,6 +226,7 @@ public class PgUsuarioDAO implements UsuarioDAO {
                     data.setData(result.getDate("data"));
                     data.setHora(result.getTime("hora"));
                     data.setEmailUsuario(result.getString("email_usuario"));
+                    data.setNomeUsuario((result.getString("nome_usuario")));
                     data.setFontes(new PgDatasetDAO(connection).getFontesDataset(data.getId()));
 
                     meusDatasets.add(data);
