@@ -1,5 +1,7 @@
 package com.featurestore.featurestore.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.sql.Time;
 import java.sql.Date;
 import java.util.List;
@@ -17,7 +19,7 @@ public class Versao {
     private Integer id_versao_base;
     private List<Feature> features; // implementa versao_possui_features
 
-
+    @JsonProperty("id_versao")
     public Integer getId() {
         return this.id_versao;
     }
@@ -26,6 +28,7 @@ public class Versao {
         this.id_versao = id;
     }
 
+    @JsonProperty("id_versao_base")
     public Integer getIdVersaoBase() {
         return this.id_versao_base;
     }
@@ -34,6 +37,7 @@ public class Versao {
         this.id_versao_base = id;
     }
 
+    @JsonProperty("id_dataset")
     public Integer getIdDataset() {
         return this.id_dataset;
     }
@@ -42,6 +46,7 @@ public class Versao {
         this.id_dataset = id;
     }
 
+    @JsonProperty("email_usuario")
     public String getEmailUsuario() {
         return this.email_usuario;
     }
@@ -50,6 +55,7 @@ public class Versao {
         this.email_usuario = email;
     }
 
+    @JsonProperty("csv")
     public String getCSV() {
         return this.csv;
     }
@@ -74,6 +80,7 @@ public class Versao {
         this.hora = hora;
     }
 
+    @JsonProperty("nome_versao")
     public String getNome() {
         return this.nome_versao;
     }
