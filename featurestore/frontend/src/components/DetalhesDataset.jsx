@@ -28,6 +28,7 @@ export default function DetalhesDataset({dataset}) {
 
                 <p className="created">
                     <strong>Criado em: </strong>{new Date(dataset.data).toLocaleDateString("pt-BR")}
+                    <span>, {dataset.hora?.slice(0, 5)}</span>
                 </p>
             </div>
 

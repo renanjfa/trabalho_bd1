@@ -44,7 +44,8 @@ public class PgVersaoDAO implements VersaoDAO {
                                 "SELECT v.id_versao, v.email_usuario, v.data, v.hora, v.csv, v.nome_versao, v.descricao, v.id_versao_base, u.nome_usuario " +
                                 "FROM featurestore.versao v " +
                                 "LEFT JOIN featurestore.usuario u ON v.email_usuario = u.email " +
-                                "WHERE id_dataset = ?;";
+                                "WHERE id_dataset = ? " +
+                                "ORDER BY v.data, v.hora;";
 
     private static final String GET_BY_EMAIL_USUARIO_QUERY =
                                 "SELECT id_versao, id_dataset, data, hora, csv, nome_versao, descricao, id_versao_base " +

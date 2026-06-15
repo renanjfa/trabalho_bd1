@@ -26,7 +26,7 @@ export default function ListaVersoes({ versoes, selectedVersaoId, onSelectVersao
 
           <input
             type="text"
-            placeholder="Buscar"
+            placeholder="Buscar por nome versão ou autor"
             className="search"
             value={search}
             onChange={(e) => setSearch(e.target.value)}

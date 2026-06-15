@@ -24,6 +24,7 @@ export default function VersaoDetalhes({ versao, onCriarVersao }) {
 
                 <p className="created">
                     <strong>Criado em: </strong>{new Date(versao.data).toLocaleDateString("pt-BR")}
+                    <span>, {versao.hora?.slice(0, 5)}</span>
                 </p>
 
                 {versao.id_versao_base != null && versao.id_versao_base !== 0 && (
