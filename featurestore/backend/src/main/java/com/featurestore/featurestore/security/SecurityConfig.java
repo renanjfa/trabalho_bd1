@@ -26,6 +26,7 @@ public class SecurityConfig {
                 config.setAllowedOrigins(List.of("http://localhost:5173"));
                 config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE"));
                 config.setAllowedHeaders(List.of("*"));
+                config.setExposedHeaders(List.of("Content-Disposition"));
                 return config;
             }))
 
