@@ -6,6 +6,7 @@ export default function AdicionarDataset({aberto, onClose, onDatasetCriado}){
     const [titulo, setTitulo]= useState("");
     const [fontes, setFontes]= useState([""]);
     const [descricao, setDescricao]= useState("");
+    const [erro, setErro]= useState("");
 
     if(!aberto){
         return null;
@@ -32,7 +33,7 @@ export default function AdicionarDataset({aberto, onClose, onDatasetCriado}){
             setDescricao("");
             onDatasetCriado(resultado);
         }catch (e){
-            console.error(e.message);
+            setErro(e.message);
         }
     }
 
@@ -87,6 +88,7 @@ export default function AdicionarDataset({aberto, onClose, onDatasetCriado}){
                             className="h-32 w-full max-w-md resize-none rounded border border-gray-300 px-2 py-2 text-sm outline-none focus:border-[#ff5a4f]"/>
                     </div>
 
+                    {erro && <p className="mt-2 text-sm text-red-500">{erro}</p>}
                     <button type="submit"  className="rounded bg-[#ef4b2d] px-7 py-2 text-xs font-bold text-white hover:bg-[#d93f24]">
                         Criar versao original
                     </button>

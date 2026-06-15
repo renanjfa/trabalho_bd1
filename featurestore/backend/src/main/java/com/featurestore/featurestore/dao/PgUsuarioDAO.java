@@ -224,6 +224,7 @@ public class PgUsuarioDAO implements UsuarioDAO {
                     data.setData(result.getDate("data"));
                     data.setHora(result.getTime("hora"));
                     data.setEmailUsuario(result.getString("email_usuario"));
+                    data.setFontes(new PgDatasetDAO(connection).getFontesDataset(data.getId()));
 
                     meusDatasets.add(data);
                 }
