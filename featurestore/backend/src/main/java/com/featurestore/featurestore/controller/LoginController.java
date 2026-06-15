@@ -52,5 +52,16 @@ public class LoginController {
         }
     }
 
+    @GetMapping("/me")
+    public ResponseEntity<?> me(HttpServletRequest request){
+        try{
+            String email = (String) request.getAttribute("emailUsuario");
+            Usuario usuario = usuarioService.buscarPorEmail(email);
+            return ResponseEntity.ok(Map.of("email",usuario.getEmail(), "nome_usuario", usuario.getNome()));
+        }catch (Exception e){
+            return ResponseEntity.badRequest().body(Map.of("error",e.getMessage()));
+        }
+    }
+
     
 }

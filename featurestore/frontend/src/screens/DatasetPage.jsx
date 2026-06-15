@@ -52,6 +52,7 @@ export default function DatasetPage() {
                     aberto={popupVersaoAberto}
                     idDataset= {parseInt(id)}
                     idVersaoBase={versaoBaseId}
+                    featuresBase={versoes.find(v=>v.id_versao===versaoBaseId)?.features || []}
                     onClose={() => setPopupVersaoAberto(false)}
                     onBack={() => setPopupVersaoAberto(false)}
                     onSubmit={(novaVersao) => {

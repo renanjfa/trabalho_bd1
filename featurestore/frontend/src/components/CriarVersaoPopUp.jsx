@@ -1,14 +1,25 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {UploadCloud, ArrowLeft, X} from "lucide-react";
 import { criarVersao } from "../services/versaoService";
 
-export default function CriarVersaoPopUp({aberto, onClose, onSubmit, onBack, idDataset, idVersaoBase}){
+export default function CriarVersaoPopUp({aberto, onClose, onSubmit, onBack, idDataset, idVersaoBase, featuresBase}){
     const [titulo, setTitulo]= useState("");
     const [descricao, setDescricao]= useState("");
     const [features, setFeatures]= useState([
         {nome: "",tipo: "", descricao: "" },
     ]);
     const [arquivoCsv, setArquivoCsv]= useState(null);
+    useEffect(()=>{
+        if(featuresBase && featuresBase.length > 0){
+            setFeatures(featuresBase.map(f=>({
+                nome: f.nome_feature,
+                tipo: f.tipo || "",
+                descricao: f.descricao || "",
+            })));
+        }else{
+            setFeatures([{nome: "", tipo: "", descricao: ""}]);
+        }
+    },[featuresBase]);
 
     if(!aberto){
         return null;

@@ -1,7 +1,7 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import { useNavigate } from "react-router-dom";
 import "./style/SideBar.css";
-import { logout } from "../services/authService";
+import { logout, buscarPerfil } from "../services/authService";
 
 import { CircleUser, LogOut, LayoutDashboard, Database, BookMarked, UserPen } from 'lucide-react';
 
@@ -10,15 +10,28 @@ export default function SideBar({ activeSection }) {
 
     const navigate = useNavigate();
 
+    const [usuario, setUsuario]= useState(null);
+
+    useEffect(()=>{
+      async function carregar(){
+        try{
+          const data = await buscarPerfil();
+          setUsuario(data);
+        }catch (e){
+          console.error(e.message);
+        }
+      }
+      carregar();
+    },[])
+
     return (
         <aside className="sidebar">
 
           <div className="profile">
             <CircleUser className="iconUser"/>
 
-            {/* OBS: RECEBER DO BANCO A INFO DO USUARIO */}
-            <h3>Nome Usuario</h3>
-            <p>emailuser@gmail.com</p>
+            <h3>{usuario ? usuario.nome_usuario : "..."}</h3>
+            <p>{usuario ? usuario.email : "..."}</p>
           </div>
 
          {/* OBS: IMPLEMENTAR SELECAO DE SIDEBAR e NAVEGACAO */}
