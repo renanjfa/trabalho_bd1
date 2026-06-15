@@ -19,11 +19,13 @@
 
 .feature {
   color: #ff6666;
+  font-size: x-large;
   margin:0;
 }
 
 .store {
     color:grey;
+    font-size: x-large;
 }
 
 .dateBlock {
