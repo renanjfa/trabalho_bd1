@@ -115,7 +115,7 @@ export default function CriarVersaoPopUp({aberto, onClose, onSubmit, onBack, idD
                         <label className="mb-2 block text-xs font-bold text-black">
                             Features
                         </label>
-                        <div className="space-y-2">
+                        <div className="space-y-2 max-h-40 overflow-y-auto">
                             {features.map((feature,index)=>(
                                 <div key={index} className="flex items-center gap-2">
                                     <input type="text" placeholder="nome" value={feature.nome} onChange={(event)=> atualizarFeature(index, "nome", event.target.value)} className="h-8 w-24 rounded border border-gray-300 px-2 text-xs outline-none focus:border-[#ef4b2d]"/>
