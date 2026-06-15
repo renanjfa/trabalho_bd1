@@ -42,7 +42,9 @@ export default function SideBar({ activeSection }) {
 
 
           <button className="logout" onClick={()=>{logout(); navigate("/login");}}>
+              <LogOut/>
           </button>
+          
 
         </aside>
     )
