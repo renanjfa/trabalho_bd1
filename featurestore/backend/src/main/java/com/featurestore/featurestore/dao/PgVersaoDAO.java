@@ -41,10 +41,11 @@ public class PgVersaoDAO implements VersaoDAO {
                                 "WHERE id_versao = ?;";
 
     private static final String GET_BY_ID_DATASET_QUERY =
-                                "SELECT v.id_versao, v.email_usuario, v.data, v.hora, v.csv, v.nome_versao, v.descricao, v.id_versao_base, u.nome_usuario " +
+                                "SELECT v.id_versao, v.email_usuario, v.data, v.hora, v.csv, v.nome_versao, v.descricao, v.id_versao_base, u.nome_usuario, v_base.nome_versao AS nome_versao_base " +
                                 "FROM featurestore.versao v " +
                                 "LEFT JOIN featurestore.usuario u ON v.email_usuario = u.email " +
-                                "WHERE id_dataset = ? " +
+                                "LEFT JOIN featurestore.versao v_base ON v.id_versao_base = v_base.id_versao " +
+                                "WHERE v.id_dataset = ? " +
                                 "ORDER BY v.data, v.hora;";
 
     private static final String GET_BY_EMAIL_USUARIO_QUERY =
@@ -247,7 +248,8 @@ public class PgVersaoDAO implements VersaoDAO {
                     v.setNome(result.getString("nome_versao"));
                     v.setDescricao(result.getString("descricao"));
                     v.setIdVersaoBase(result.getInt("id_versao_base"));
-                    v.setNomeUsuario(result.getString("nome_usuario"));;
+                    v.setNomeUsuario(result.getString("nome_usuario"));
+                    v.setNomeVersaoBase(result.getString("nome_versao_base"));
                     v.setFeatures(getFeaturesByIdVersao(v.getId()));
 
                     versoes.add(v);

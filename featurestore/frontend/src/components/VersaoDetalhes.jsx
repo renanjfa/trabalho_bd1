@@ -29,7 +29,7 @@ export default function VersaoDetalhes({ versao, onCriarVersao }) {
 
                 {versao.id_versao_base != null && versao.id_versao_base !== 0 && (
                     <p className="created">
-                        <strong>Baseado na versão: </strong>{versao.id_versao_base}
+                        <strong>Baseado na versão: </strong>{versao.nome_versao_base}
                     </p>
                 )}
             </div>

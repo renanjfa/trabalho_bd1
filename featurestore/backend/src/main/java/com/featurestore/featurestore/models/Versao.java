@@ -18,6 +18,7 @@ public class Versao {
     private String descricao;
     private Integer id_versao_base;
     private String nome_usuario;
+    private String nome_versao_base;
     private List<Feature> features; // implementa versao_possui_features
 
     @JsonProperty("id_versao")
@@ -61,8 +62,17 @@ public class Versao {
         return this.nome_usuario;
     }
 
-    public void setNomeUsuario(String nome) {
+    public void setNomeUsuario (String nome) {
         this.nome_usuario = nome;
+    }
+
+    @JsonProperty("nome_versao_base")
+    public String getNomeVersaoBase() {
+        return this.nome_versao_base;
+    }
+
+    public void setNomeVersaoBase(String nome) {
+        this.nome_versao_base = nome;
     }
 
     @JsonProperty("csv")

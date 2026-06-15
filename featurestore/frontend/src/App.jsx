@@ -8,7 +8,7 @@ import DatasetPage from "./screens/DatasetPage";
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<Registro />} />
+      <Route path="/" element={<Login />} />
       <Route path="/registro" element={<Registro />} />
       <Route path="/login" element={<Login />} />
       <Route path="/minha-area" element={<MinhaArea />} />

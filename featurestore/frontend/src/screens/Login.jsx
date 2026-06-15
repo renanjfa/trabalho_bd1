@@ -40,11 +40,22 @@ export default function Login(){
                         {erro && (
                             <p className="mt-3 text-sm text-red-500">{erro}</p>
                         )}
-                        <div className="mt-12">
-                            <button type="submit"className="bg-[#ff7f86] text-white text-sm px-8 py-3 rounded hover:bg-[#ff6f77] transition">
-                                Login
-                            </button>
-                        </div>
+                        <div className="mt-12 flex flex-col gap-3">
+                        <button
+                            type="submit"
+                            className="bg-[#ff7f86] text-white text-sm px-8 py-3 rounded hover:bg-[#ff6f77] transition"
+                        >
+                            Login
+                        </button>
+
+                        <button
+                            type="button"
+                            onClick={() => navigate("/registro")}
+                            className="text-sm px-8 py-3 rounded border border-[#ff7f86] text-[#ff7f86] hover:bg-[#fff0f1] transition"
+                        >
+                            Não possui conta? Cadastre-se
+                        </button>
+                    </div>
                     </form>
                 </div>
                 
