@@ -36,6 +36,10 @@
   gap: 10px;
 }
 
+.section-header strong {
+  font-size: x-large;
+}
+
 .add-btn,
 .versions-btn {
   background: #f15a24;
