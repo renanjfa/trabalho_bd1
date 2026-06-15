@@ -33,7 +33,6 @@ export default function VersaoDetalhes({ versao, onCriarVersao }) {
                 )}
             </div>
 
-            {/* OBS: RECEBER DESCRICAO e FONTES DO BANCO */}
             <div className="gap-descricao-fontes">
                 <h3>Tabela Features</h3>
                 {versao.features && versao.features.length > 0 ? (
@@ -56,7 +55,7 @@ export default function VersaoDetalhes({ versao, onCriarVersao }) {
                     Baixar Versao
                 </button>
                 <span>
-                    <button className="editar-versao" onClick={onCriarVersao}>
+                    <button className="editar-versao" onClick={()=> onCriarVersao(versao.id_versao)}>
                         Editar/Criar Versao
                     </button>
                 </span>
