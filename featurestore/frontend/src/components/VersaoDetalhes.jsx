@@ -19,7 +19,7 @@ export default function VersaoDetalhes({ versao, onCriarVersao }) {
             {/* OBS: RECEBER AUTOR e CREATED ON DO BANCO */}
             <div className="gap-author-data">
                 <p className="autor-nome">
-                    <strong className="created">Autor:</strong> {versao.email_usuario}
+                    <strong className="created">Autor:</strong> {versao.nome_usuario}
                 </p>
 
                 <p className="created">

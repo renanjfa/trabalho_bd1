@@ -14,7 +14,7 @@ export default function VersaoCard({ versao, onClick, selected }) {
             <div className="footer-card">
                 <small className="autor">
                 <strong>Autor: </strong>
-                <span className="nome-autor">{versao.email_usuario}</span>
+                <span className="nome-autor">{versao.nome_usuario}</span>
                 </small>
 
                 <small className="data-created">

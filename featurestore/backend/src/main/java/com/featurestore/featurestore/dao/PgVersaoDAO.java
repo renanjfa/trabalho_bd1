@@ -41,8 +41,9 @@ public class PgVersaoDAO implements VersaoDAO {
                                 "WHERE id_versao = ?;";
 
     private static final String GET_BY_ID_DATASET_QUERY =
-                                "SELECT id_versao, email_usuario, data, hora, csv, nome_versao, descricao, id_versao_base " +
-                                "FROM featurestore.versao " +
+                                "SELECT v.id_versao, v.email_usuario, v.data, v.hora, v.csv, v.nome_versao, v.descricao, v.id_versao_base, u.nome_usuario " +
+                                "FROM featurestore.versao v " +
+                                "LEFT JOIN featurestore.usuario u ON v.email_usuario = u.email " +
                                 "WHERE id_dataset = ?;";
 
     private static final String GET_BY_EMAIL_USUARIO_QUERY =
@@ -55,8 +56,9 @@ public class PgVersaoDAO implements VersaoDAO {
                                 "WHERE id_versao = ?; ";
 
     private static final String ALL_QUERY =
-                                "SELECT id_versao, email_usuario, id_dataset, data, hora, csv, nome_versao, descricao, id_versao_base " +
-                                "FROM featurestore.versao; ";
+                                "SELECT v.id_versao, v.email_usuario, v.id_dataset, v.data, v.hora, v.csv, v.nome_versao, v.descricao, v.id_versao_base, u.nome_usuario " +
+                                "FROM featurestore.versao v " +
+                                "LEFT JOIN featurestore.usuario u ON v.email_usuario = u.email;";
 
     private static final String INSERT_FEATURE_QUERY = 
                                 "INSERT INTO featurestore.versao_possui_feature (id_versao, id_feature) " +
@@ -244,6 +246,7 @@ public class PgVersaoDAO implements VersaoDAO {
                     v.setNome(result.getString("nome_versao"));
                     v.setDescricao(result.getString("descricao"));
                     v.setIdVersaoBase(result.getInt("id_versao_base"));
+                    v.setNomeUsuario(result.getString("nome_usuario"));;
                     v.setFeatures(getFeaturesByIdVersao(v.getId()));
 
                     versoes.add(v);
@@ -343,6 +346,7 @@ public class PgVersaoDAO implements VersaoDAO {
                 v.setNome(result.getString("nome_versao"));
                 v.setDescricao(result.getString("descricao"));
                 v.setIdVersaoBase(result.getInt("id_versao_base"));
+                v.setNomeUsuario(result.getString("nome_usuario"));
                 v.setFeatures(getFeaturesByIdVersao(v.getId()));
 
                 vList.add(v);
