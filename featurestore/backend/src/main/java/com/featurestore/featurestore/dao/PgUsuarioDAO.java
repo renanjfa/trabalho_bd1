@@ -34,7 +34,7 @@ public class PgUsuarioDAO implements UsuarioDAO {
                                 "WHERE email = ?;";
 
     private static final String ALL_QUERY =
-                                "SELECT email, nome " +
+                                "SELECT email, nome_usuario " +
                                 "FROM featurestore.usuario;";
     
     private static final String UPDATE_QUERY =

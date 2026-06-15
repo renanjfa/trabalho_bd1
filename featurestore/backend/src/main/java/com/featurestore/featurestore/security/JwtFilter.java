@@ -7,6 +7,12 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.web.filter.OncePerRequestFilter;
 import java.io.IOException;
 
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
+
+import java.util.Collection;
+import java.util.Collections;
+
 public class JwtFilter extends OncePerRequestFilter {
 
     @Override
@@ -43,6 +49,8 @@ public class JwtFilter extends OncePerRequestFilter {
         String email = JwtUtil.getEmailFromToken(token);
         request.setAttribute("emailUsuario", email);
 
+        UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(email,null,Collections.emptyList());
+        SecurityContextHolder.getContext().setAuthentication(authentication);
         
         filterChain.doFilter(request, response);
     }

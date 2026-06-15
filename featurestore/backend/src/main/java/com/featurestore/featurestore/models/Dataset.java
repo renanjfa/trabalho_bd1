@@ -1,5 +1,7 @@
 package com.featurestore.featurestore.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.sql.Date;
 import java.sql.Time;
 import java.util.List;
@@ -26,6 +28,7 @@ public class Dataset {  // featurestore.data_set
         this.id = id;
     }
 
+    @JsonProperty("nome_dataset")
     public String getNome() {
         return this.nome_dataset;
     }
@@ -57,7 +60,7 @@ public class Dataset {  // featurestore.data_set
     public void setHora(Time hora) {
         this.hora = hora;
     }
-
+    @JsonProperty("email_usuario")
     public String getEmailUsuario() {
         return this.email_usuario;
     }

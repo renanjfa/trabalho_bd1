@@ -1,5 +1,6 @@
 package com.featurestore.featurestore.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Feature {  // featurestore.feature
     
@@ -8,7 +9,7 @@ public class Feature {  // featurestore.feature
     private String tipo;  
     private String descricao;   // (type = text)
 
-
+    @JsonProperty("id_feature")
     public Integer getId() {
         return this.id_feature;
     }
@@ -16,7 +17,7 @@ public class Feature {  // featurestore.feature
     public void setId(Integer id) {
         this.id_feature = id;
     }
-
+    @JsonProperty("nome_feature")
     public String getNome() {
         return this.nome_feature;
     }
