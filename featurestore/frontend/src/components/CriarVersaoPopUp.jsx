@@ -4,8 +4,10 @@ import { criarVersao } from "../services/versaoService";
 
 export default function CriarVersaoPopUp({aberto, onClose, onSubmit, onBack, idDataset}){
     const [titulo, setTitulo]= useState("");
+    const [descricao, setDescricao]= useState("");
+    const [idVersaoBase, setIdVersaoBase]= useState(null);
     const [features, setFeatures]= useState([
-        {nome: "", descricao: "" },
+        {nome: "",tipo: "", descricao: "" },
     ]);
     const [arquivoCsv, setArquivoCsv]= useState(null);
 
@@ -14,7 +16,7 @@ export default function CriarVersaoPopUp({aberto, onClose, onSubmit, onBack, idD
     }
 
     function adicionarFeature(){
-        setFeatures([...features, {nome:"",descricao:""}]);
+        setFeatures([...features, {nome:"",tipo: "",descricao:""}]);
     }
 
     function atualizarFeature(index, campo, valor){
@@ -43,9 +45,9 @@ export default function CriarVersaoPopUp({aberto, onClose, onSubmit, onBack, idD
                 tipo: f.tipo || "",
                 descricao: f.descricao,
             }));
-            await criarVersao(idDataset, titulo, null, null, null, featuresParaEnviar);
+            await criarVersao(idDataset, titulo, descricao, arquivoCsv?.name || null, idVersaoBase, featuresParaEnviar);
             setTitulo("");
-            setFeatures([{nome: "", descricao: ""}]);
+            setFeatures([{nome: "",tipo: "", descricao: ""}]);
             setArquivoCsv(null);
             onSubmit();
         } catch (e) {
@@ -78,12 +80,21 @@ export default function CriarVersaoPopUp({aberto, onClose, onSubmit, onBack, idD
 
                     <div className="mb-4">
                         <label className="mb-2 block text-xs font-bold text-black">
+                            Descricao
+                        </label>
+                        <textarea value={descricao} onChange={(event) => setDescricao(event.target.value)}
+                            className="h-20 w-full max-w-md resize-none rounded border border-gray-300 px-2 py-2 text-sm outline-none focus:border-[#ef4b2d]"/>
+                    </div>
+
+                    <div className="mb-4">
+                        <label className="mb-2 block text-xs font-bold text-black">
                             Features
                         </label>
                         <div className="space-y-2">
                             {features.map((feature,index)=>(
-                                <div key={index} className="flex gap-2">
+                                <div key={index} className="flex items-center gap-2">
                                     <input type="text" placeholder="nome" value={feature.nome} onChange={(event)=> atualizarFeature(index, "nome", event.target.value)} className="h-8 w-24 rounded border border-gray-300 px-2 text-xs outline-none focus:border-[#ef4b2d]"/>
+                                    <input type="text" placeholder="tipo" value={feature.tipo} onChange={(event)=> atualizarFeature(index, "tipo", event.target.value)} className="h-8 w-24 rounded border border-gray-300 px-2 text-xs outline-none focus:border-[#ef4b2d]"/>
                                     <input type="text" placeholder="descricao feature" value={feature.descricao} onChange={(event)=> atualizarFeature(index, "descricao", event.target.value)} className="h-8 w-full max-w-sm rounded border border-gray-300 px-2 text-xs outline-none focus:border-[#ef4b2d]"/>
                                     {features.length > 1 && (
                                         <button type="button" onClick={()=> removerFeature(index)} className="text-red-500 hover:text-red-700">

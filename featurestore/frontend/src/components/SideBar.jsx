@@ -41,7 +41,6 @@ export default function SideBar({ activeSection }) {
           </nav>
 
 
-          {/* OBS: FUNCIONALIDADE LOGOUT */}
           <button className="logout" onClick={()=>{logout(); navigate("/login");}}>
           </button>
 
