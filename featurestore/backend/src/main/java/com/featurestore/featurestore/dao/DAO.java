@@ -3,7 +3,6 @@ package com.featurestore.featurestore.dao;
 import java.sql.SQLException;
 import java.util.List;
 
-// parameters: T (model)
 public interface DAO<T> {
 
     public void create(T t) throws SQLException;
