@@ -21,15 +21,14 @@ public class PgRelatoriosDAO implements RelatoriosDAO {
         this.connection = connection;
     }
 
-    private static final String QUANTIDADE_DATASETS_SISTEMA_QUERY =
-                                "SELECT COUNT(*) FROM featurestore.data_set; ";
+    // SistemaDTO
+    private static final String SISTEMA_QUERY =
+                                "SELECT " +
+                                "   (SELECT COUNT(*) FROM featurestore.data_set) AS qnt_datasets, " +
+                                "   (SELECT COUNT(*) FROM featurestore.versao) AS qnt_versoes, " +
+                                "   (SELECT COUNT(*) FROM featurestore.usuario) AS qnt_usuarios; ";
 
-    private static final String QUANTIDADE_VERSOES_SISTEMA_QUERY =
-                                "SELECT COUNT(*) FROM featurestore.versao; ";
-
-    private static final String QUANTIDADE_USUARIOS_SISTEMA_QUERY =
-                                "SELECT COUNT(*) FROM featurestore.usuario; ";
-
+    // QntVersoesDatasetDTO
     private static final String QUANTIDADE_VERSOES_CADA_DATASET_QUERY =
                                 "SELECT d.nome_dataset, u.nome_usuario, COUNT(v.id_versao) AS quantidade_versoes " +
                                 "FROM featurestore.data_set d " +
@@ -37,42 +36,67 @@ public class PgRelatoriosDAO implements RelatoriosDAO {
                                 "   LEFT JOIN featurestore.versao v ON v.id_dataset = d.id " +
                                 "   GROUP BY d.nome_dataset, u.nome_usuario " +
                                 "   ORDER BY quantidade_versoes DESC;";
-                         
-    private static final String QUANTIDADE_ACESSOS_DATASET_QUERY =
-                                "SELECT COUNT(*) FROM featurestore.usuario_acessa_dataset " +
-                                "WHERE id_dataset = ?; ";
+              
+    // QntAcessoDownloadDatasetDTO
+    private static final String QUANTIDADE_ACESSOS_DOWNLAODS_DATASET_QUERY =
+                                "SELECT " +
+                                "   ( " +
+                                "       SELECT COUNT(*) " +
+                                "       FROM featurestore.usuario_acessa_dataset " +
+                                "       WHERE id_dataset = ? " +
+                                "   ) AS quantidade_acessos, " +
+                                "   ( " +
+                                "       SELECT COUNT(*) " +
+                                "       FROM featurestore.usuario_faz_download_versao ufdv " +
+                                "       JOIN featurestore.versao v " +
+                                "           ON v.id_versao = ufdv.id_versao " +
+                                "       WHERE v.id_dataset = ? " +
+                                "   ) AS quantidade_downloads; ";
                                 
-    private static final String QUANTIDADE_DOWNLOADS_VERSAO_QUERY =
-                                "SELECT COUNT(*) FROM featurestore.usuario_faz_download_versao " +
-                                "WHERE id_versao = ?; ";
-
-    private static final String QUANTIDADE_DOWNLOADS_DATASET_QUERY = 
-                                "SELECT COUNT(*) AS qnt_downloads " +
-                                "FROM featurestore.usuario_faz_download_versao ufdv " +
-                                "JOIN featurestore.versao v " +
-                                "   ON ufdv.id_versao = v.id_versao " +
-                                "WHERE v.id_dataset = ?; ";
-
-    private static final String DATASETS_MAIS_VISUALIZADOS_QUERY = 
+    // DatasetMaisDTO
+    private static final String DATASETS_MAIS_ORDER_ACESSOS_QUERY = 
                                 "SELECT d.nome_dataset, u.nome_usuario, " +
-                                "   COUNT(uad.id_dataset) AS qnt_acessos " +
+                                "   COALESCE(a.qnt_acessos, 0) AS qnt_acessos, " +
+                                "   COALESCE(dl.qnt_downloads, 0) AS qnt_downloads " +
                                 "FROM featurestore.data_set d " +
-                                "LEFT JOIN featurestore.usuario_acessa_dataset uad ON uad.id_dataset=d.id " +
-                                "LEFT JOIN featurestore.usuario u ON u.email=d.email_usuario " +
-                                "GROUP BY d.id, d.nome_dataset, u.nome_usuario " +
+                                "LEFT JOIN featurestore.usuario u ON u.email = d.email_usuario " +
+                                "LEFT JOIN ( " +
+                                "   SELECT id_dataset, COUNT(*) AS qnt_acessos " +
+                                "   FROM featurestore.usuario_acessa_dataset " +
+                                "   GROUP BY id_dataset " +
+                                ") a ON a.id_dataset = d.id " +
+                                "LEFT JOIN ( " +
+                                "   SELECT v.id_dataset, COUNT(*) AS qnt_downloads " +
+                                "   FROM featurestore.usuario_faz_download_versao ufdv " +
+                                "   JOIN featurestore.versao v " +
+                                "       ON v.id_versao = ufdv.id_versao " +
+                                "   GROUP BY v.id_dataset " +
+                                ") dl ON dl.id_dataset = d.id " +
                                 "ORDER BY qnt_acessos DESC;";
 
-    private static final String DATASETS_MAIS_BAIXADOS_QUERY =
+    // DatasetMaisDTO
+    private static final String DATASETS_MAIS_ORDER_DOWNLOADS_QUERY =
                                 "SELECT d.nome_dataset, u.nome_usuario, " +
-                                "   COUNT(ufdv.id_versao) AS qnt_downloads " +
+                                "   COALESCE(a.qnt_acessos, 0) AS qnt_acessos, " +
+                                "   COALESCE(dl.qnt_downloads, 0) AS qnt_downloads " +
                                 "FROM featurestore.data_set d " +
-                                "   LEFT JOIN featurestore.versao v ON v.id_dataset = d.id " +
-                                "   LEFT JOIN featurestore.usuario_faz_download_versao ufdv ON ufdv.id_versao = v.id_versao " +
-                                "   LEFT JOIN featurestore.usuario u ON u.email = d.email_usuario " +
-                                "   GROUP BY d.id, d.nome_dataset, u.nome_usuario " +
-                                "   ORDER BY qnt_downloads DESC;";
+                                "LEFT JOIN featurestore.usuario u ON u.email = d.email_usuario " +
+                                "LEFT JOIN ( " +
+                                "   SELECT id_dataset, COUNT(*) AS qnt_acessos " +
+                                "   FROM featurestore.usuario_acessa_dataset " +
+                                "   GROUP BY id_dataset " +
+                                ") a ON a.id_dataset = d.id " +
+                                "LEFT JOIN ( " +
+                                "   SELECT v.id_dataset, COUNT(*) AS qnt_downloads " +
+                                "   FROM featurestore.usuario_faz_download_versao ufdv " +
+                                "   JOIN featurestore.versao v " +
+                                "       ON v.id_versao = ufdv.id_versao " +
+                                "   GROUP BY v.id_dataset " +
+                                ") dl ON dl.id_dataset = d.id " +
+                                "ORDER BY qnt_downloads DESC;";
 
-    private static final String CONTRIBUICAO_USUARIO_QUERY =
+    // ContribuicaoDTO
+    private static final String CONTRIBUICAO_QUERY =
                                 "WITH " +
                                 "total_sistema AS ( " +
                                 "   SELECT " +
@@ -96,8 +120,9 @@ public class PgRelatoriosDAO implements RelatoriosDAO {
                                 "   FROM contribuicao_usuario c " +
                                 "   CROSS JOIN total_sistema t " +
                                 "   ORDER BY contribuicao_percentual DESC;";
-                                
-    private static final String DATA_ACESSOS_E_DOWNLOADS_DATASET_QUERY =
+    
+    // HistoricoDatasetDTO
+    private static final String HISTORICO_ACESSOS_DOWNLOADS_DATASET_QUERY =
                                 "SELECT dia, SUM(acessos) AS acessos, SUM(downloads) AS downloads " +
                                 "FROM ( " +
                                 "   SELECT " +
