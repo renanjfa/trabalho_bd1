@@ -21,7 +21,7 @@ public class RelatoriosService {
         }
     }
 
-    public QntAcessoDownloadDatasetDTO gAcessoDownloadDatasetDTO(Integer idDataSet) throws Exception {
+    public QntAcessoDownloadDatasetDTO getAcessosDownloadDatasetDTO(Integer idDataSet) throws Exception {
         try (DAOFactory daoFactory = DAOFactory.getInstance()){
             RelatoriosDAO dao = daoFactory.getRelatoriosDAO();
             return dao.getAcessosDownloadsDataset(idDataSet);
