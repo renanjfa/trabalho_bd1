@@ -9,9 +9,8 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration;
+import com.featurestore.featurestore.dto.*;
 
-import com.featurestore.featurestore.models.*;
 
 public class PgRelatoriosDAO implements RelatoriosDAO {
     
@@ -38,7 +37,7 @@ public class PgRelatoriosDAO implements RelatoriosDAO {
                                 "   ORDER BY quantidade_versoes DESC;";
               
     // QntAcessoDownloadDatasetDTO
-    private static final String QUANTIDADE_ACESSOS_DOWNLAODS_DATASET_QUERY =
+    private static final String QUANTIDADE_ACESSOS_DOWNLOADS_DATASET_QUERY =
                                 "SELECT " +
                                 "   ( " +
                                 "       SELECT COUNT(*) " +
@@ -121,7 +120,7 @@ public class PgRelatoriosDAO implements RelatoriosDAO {
                                 "   CROSS JOIN total_sistema t " +
                                 "   ORDER BY contribuicao_percentual DESC;";
     
-    // HistoricoDatasetDTO
+    // HistoricoDatasetsDTO
     private static final String HISTORICO_ACESSOS_DOWNLOADS_DATASET_QUERY =
                                 "SELECT dia, SUM(acessos) AS acessos, SUM(downloads) AS downloads " +
                                 "FROM ( " +
@@ -148,27 +147,210 @@ public class PgRelatoriosDAO implements RelatoriosDAO {
                                 "ORDER BY dia;";
 
 
+    @Override
+    public SistemaDTO getInfoSistema() throws SQLException {
+
+        SistemaDTO sys = new SistemaDTO();
+
+        try (PreparedStatement statement = connection.prepareStatement(SISTEMA_QUERY)) {
+
+            try (ResultSet result = statement.executeQuery()) {
+                if (result.next()) {
+                    sys.setQntDatasets(result.getInt("qnt_datasets"));
+                    sys.setQntVersoes(result.getInt("qnt_versoes"));
+                    sys.setQntUsuarios(result.getInt("qnt_usuarios"));
+                }
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(PgRelatoriosDAO.class.getName()).log(Level.SEVERE, "DAO", ex);
+
+            throw new SQLException("Erro ao retornar informacoes relativas ao sistema.");
+        }
+
+        return sys;
+    }
+
+    @Override
+    public List<QntVersoesDatasetDTO> getQuantidadeVersoesDatasets() throws SQLException {
+        List<QntVersoesDatasetDTO> l = new ArrayList<>();
+
+        try (PreparedStatement statement = connection.prepareStatement(QUANTIDADE_VERSOES_CADA_DATASET_QUERY)) {
+
+            try (ResultSet result = statement.executeQuery()) {
+
+                while(result.next()) {
+                    QntVersoesDatasetDTO q = new QntVersoesDatasetDTO();
+                    q.setNomeDataset(result.getString("nome_dataset"));
+                    q.setNomeUsuario(result.getString("nome_usuario"));
+                    q.setQntVersoes(result.getInt("quantidade_versoes"));
+
+                    l.add(q);
+                }
+
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(PgRelatoriosDAO.class.getName()).log(Level.SEVERE, "DAO", ex);
+
+            throw new SQLException("Erro ao retornar quantidade de versoes dos datasets.");
+        }
+
+        return l;
+    }
+
+    @Override
+    public QntAcessoDownloadDatasetDTO getAcessosDownloadsDataset(Integer id_dataset) throws SQLException {
+        QntAcessoDownloadDatasetDTO q = new QntAcessoDownloadDatasetDTO();
+
+        try (PreparedStatement statement = connection.prepareStatement(QUANTIDADE_ACESSOS_DOWNLOADS_DATASET_QUERY)) {
+
+            statement.setInt(1, id_dataset);
+            statement.setInt(2, id_dataset);
+
+            try (ResultSet result = statement.executeQuery()) {
+                if (result.next()) {
+                    q.setQntAcessos(result.getInt("quantidade_acessos"));
+                    q.setQntDownloads(result.getInt("quantidade_downloads"));
+                }
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(PgRelatoriosDAO.class.getName()).log(Level.SEVERE, "DAO", ex);
+
+            throw new SQLException("Erro ao retornar acessos e downloads de um dataset especifico.");
+        }
+
+        return q;
+    }
+
+    @Override
+    public List<DatasetMaisDTO> getDatasetsMais(String order_by) throws SQLException {
+        List<DatasetMaisDTO> l = new ArrayList<>();
+
+        String query;
+
+        if("acessos".equals(order_by)) {
+            query = DATASETS_MAIS_ORDER_ACESSOS_QUERY;
+        }
+        else if("downloads".equals(order_by)) {
+            query = DATASETS_MAIS_ORDER_DOWNLOADS_QUERY;
+        }
+        else {
+            throw new SQLException("Erro em comando order_by.");
+        }
+        
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            
+            try (ResultSet result = statement.executeQuery()) {
+                
+                while(result.next()) {
+                    DatasetMaisDTO d = new DatasetMaisDTO();
+                    d.setNomeDataset(result.getString("nome_dataset"));
+                    d.setNomeUsuario(result.getString("nome_usuario"));
+                    d.setQntAcessos(result.getInt("qnt_acessos"));
+                    d.setQntDownloads(result.getInt("qnt_downloads"));
+
+                    l.add(d);
+                }
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(PgRelatoriosDAO.class.getName()).log(Level.SEVERE, "DAO", ex);
+
+            throw new SQLException("Erro ao retornar datasets mais visualizados.");
+        }
+
+        return l;
+    }
+
+    @Override
+    public List<ContribuicaoDTO> getContribuicaoUsuarios() throws SQLException {
+        List<ContribuicaoDTO> l = new ArrayList<>();
+
+        try (PreparedStatement statement = connection.prepareStatement(CONTRIBUICAO_QUERY)) {
+
+            try (ResultSet result = statement.executeQuery()) {
+
+                
+                while(result.next()) {
+                    ContribuicaoDTO c = new ContribuicaoDTO();
+                    c.setNomeUsuario(result.getString("nome_usuario"));
+                    c.setDatasetsCriados(result.getInt("datasets_criados"));
+                    c.setVersoesCriadas(result.getInt("versoes_criadas"));
+                    c.setTotalContribuicoes(result.getInt("total_contribuicoes"));
+                    c.setContribuicaoPercentual(result.getFloat("contribuicao_percentual"));
+
+                    l.add(c);
+                }
+
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(PgRelatoriosDAO.class.getName()).log(Level.SEVERE, "DAO", ex);
+
+            throw new SQLException("Erro ao retornar contribuicoes dos usuarios.");
+        }
+
+        return l;
+    }
+
+    @Override
+    public List<HistoricoDatasetDTO> getHistoricoAcessosDownloads(Integer id_dataset) throws SQLException {
+        List<HistoricoDatasetDTO> l = new ArrayList<>();
+
+        try (PreparedStatement statement = connection.prepareStatement(HISTORICO_ACESSOS_DOWNLOADS_DATASET_QUERY)) {
+
+            statement.setInt(1, id_dataset);
+            statement.setInt(2, id_dataset);
+
+            try (ResultSet result = statement.executeQuery()) {
+
+                while(result.next()) {
+                    HistoricoDatasetDTO h = new HistoricoDatasetDTO();
+                    h.setDia(result.getDate("dia"));
+                    h.setQntAcessos(result.getInt("acessos"));
+                    h.setQntDownloads(result.getInt("downloads"));
+                    
+                    l.add(h);
+                }
+
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(PgRelatoriosDAO.class.getName()).log(Level.SEVERE, "DAO", ex);
+
+            throw new SQLException("Erro ao retornar historico de acessos e downloads de um dataset.");
+        }
+
+        return l;
+    }
+    
+
+
                                 
-                                
-    public void create(Usuario t) throws SQLException {
-
+    @Override                       
+    public void create(SistemaDTO t) throws SQLException {
+        throw new UnsupportedOperationException("Operação não suportada.");
     }
 
-    public Usuario read(Integer id) throws SQLException {
-        Usuario u = new Usuario();
-        return u;
+    @Override
+    public SistemaDTO read(Integer id) throws SQLException {
+        throw new UnsupportedOperationException("Operação não suportada.");
     }
 
-    public void update(Usuario t) throws SQLException {
-
+    @Override
+    public void update(SistemaDTO t) throws SQLException {
+        throw new UnsupportedOperationException("Operação não suportada.");
     }
 
+    @Override
     public void delete(Integer id) throws SQLException {
-
+        throw new UnsupportedOperationException("Operação não suportada.");
     }
 
-    public List<Usuario> all() throws SQLException {
-        List<Usuario> u = new ArrayList<>();
-        return u;
+    @Override
+    public List<SistemaDTO> all() throws SQLException {
+        throw new UnsupportedOperationException("Operação não suportada.");
     }   
 }
