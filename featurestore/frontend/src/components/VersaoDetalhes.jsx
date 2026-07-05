@@ -41,7 +41,7 @@ export default function VersaoDetalhes({ versao, onCriarVersao }) {
                     {versao.descricao}
                 </p>
 
-                <h3>Tabela Features</h3>
+                <h3>Features</h3>
 
                 {versao.features && versao.features.length > 0 ? (
                     <div className="features-table-container">
