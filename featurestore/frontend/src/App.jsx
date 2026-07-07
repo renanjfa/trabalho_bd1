@@ -4,6 +4,7 @@ import Login from "./screens/Login";
 import MinhaArea from "./screens/MinhaArea";
 import Datasets from "./screens/Datasets";
 import DatasetPage from "./screens/DatasetPage";
+import Dashboard from "./screens/Dashboard";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <Route path="/minha-area" element={<MinhaArea />} />
       <Route path="/datasets" element={<Datasets />} />
       <Route path="/dataset-page/:id" element={<DatasetPage />} />
+      <Route path="/dashboard" element={<Dashboard />} />
     </Routes>
   );
 }
