@@ -18,7 +18,7 @@ export default function Login(){
         setErro("");
         try {
             await login(email, senha);
-            navigate("/minha-area");
+            navigate("/dashboard");
         } catch (e) {
             setErro(e.message);
         }
