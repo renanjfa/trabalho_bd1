@@ -5,6 +5,7 @@ import MinhaArea from "./screens/MinhaArea";
 import Datasets from "./screens/Datasets";
 import DatasetPage from "./screens/DatasetPage";
 import Dashboard from "./screens/Dashboard";
+import RotaProtegida from "./components/RotaProtegida";
 
 function App() {
   return (
@@ -12,10 +13,10 @@ function App() {
       <Route path="/" element={<Login />} />
       <Route path="/registro" element={<Registro />} />
       <Route path="/login" element={<Login />} />
-      <Route path="/minha-area" element={<MinhaArea />} />
-      <Route path="/datasets" element={<Datasets />} />
-      <Route path="/dataset-page/:id" element={<DatasetPage />} />
-      <Route path="/dashboard" element={<Dashboard />} />
+      <Route path="/minha-area" element={<RotaProtegida><MinhaArea /></RotaProtegida>} />
+      <Route path="/datasets" element={<RotaProtegida><Datasets /></RotaProtegida>} />
+      <Route path="/dataset-page/:id" element={<RotaProtegida><DatasetPage /></RotaProtegida>} />
+      <Route path="/dashboard" element={<RotaProtegida><Dashboard /></RotaProtegida>} />
     </Routes>
   );
 }

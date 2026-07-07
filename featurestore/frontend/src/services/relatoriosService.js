@@ -4,12 +4,12 @@ export async function getInfoSistema() {
     return api("/relatorios/sistema");
 }
 
-export async function getVersaoDatasets() {
-    return api("/relatorios/sistema");
+export async function getVersoesDatasets() {
+    return api("/relatorios/versoes-datasets");
 }
 
 export async function getAcessosDownloadsDataset(idDataset) {
-    return api("/relatorios/acessos-downloads" + idDataset);
+    return api("/relatorios/acessos-downloads/" + idDataset);
 }
 
 export async function getDatasetsMais(orderBy = "acessos"){
@@ -21,5 +21,5 @@ export async function getContribuicoes(){
 }
 
 export async function getHistoricoDataset(idDataset){
-    return api("/relatorios/historico" + idDataset);
+    return api("/relatorios/historicos/" + idDataset);
 }
