@@ -70,7 +70,7 @@ export default function AdicionarDataset({aberto, onClose, onDatasetCriado}){
                                         className="h-8 w-full max-w-md rounded border border-gray-300 px-2 text-sm outline-none focus:border-[#ff5a4f]"/>
                                     {fontes.length > 1 && (
                                         <button type="button" onClick={()=> removerFonte(index)} className="text-red-500 hover:text-red-700">
-                                            < X size={16}/>
+                                            <X size={16}/>
                                         </button>
                                     )}
                                 </div>

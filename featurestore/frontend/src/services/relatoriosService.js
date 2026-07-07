@@ -21,5 +21,5 @@ export async function getContribuicoes(){
 }
 
 export async function getHistoricoDataset(idDataset){
-    return api("/relatorios/historico/" + idDataset);
+    return api("/relatorios/historicos/" + idDataset);
 }
