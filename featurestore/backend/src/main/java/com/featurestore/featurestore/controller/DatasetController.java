@@ -1,5 +1,6 @@
 package com.featurestore.featurestore.controller;
 
+import com.featurestore.featurestore.service.AcessoDatasetService;
 import com.featurestore.featurestore.service.DatasetService;
 import com.featurestore.featurestore.models.Dataset;
 
@@ -26,10 +27,15 @@ public class DatasetController {
         }
     }
 
+    private final AcessoDatasetService acessoService = new AcessoDatasetService();
     @GetMapping("/{id}")
-    public ResponseEntity<?> buscarPorId(@PathVariable Integer id){
+    public ResponseEntity<?> buscarPorId(@PathVariable Integer id, HttpServletRequest request){
         try{
             Dataset dataset = datasetService.buscarPorId(id);
+            try {
+                String emailUsuario = (String) request.getAttribute("emailUsuario");
+                acessoService.registrarAcesso(emailUsuario, id);
+            } catch (Exception ignored) {}
             return ResponseEntity.ok(dataset);
         }catch (Exception e){
             return ResponseEntity.badRequest().body(Map.of("error",e.getMessage()));
