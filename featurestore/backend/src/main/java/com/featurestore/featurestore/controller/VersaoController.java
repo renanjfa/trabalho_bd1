@@ -67,9 +67,11 @@ public class VersaoController {
             Versao versao = versaoService.buscaPorId(id);
             String csv = versao.getCSV();
             if(csv == null || csv.isBlank()){
-                downloadService.registrarDownload(emailUsuario, id);
                 return ResponseEntity.badRequest().body(Map.of("error","Versao nao possui arquivo CSV"));
             }
+            try {
+                downloadService.registrarDownload(emailUsuario, id);
+            }catch (Exception ignored) {}
             return ResponseEntity.ok().header("Content-Type", "text/csv").header("Content-Disposition", "attachment;filename=\"" + versao.getNome() + ".csv\"").body(csv);
         }catch (Exception e){
             return ResponseEntity.badRequest().body(Map.of("error",e.getMessage()));
