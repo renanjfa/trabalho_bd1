@@ -1,5 +1,6 @@
 package com.featurestore.featurestore.controller;
 
+import com.featurestore.featurestore.service.DownloadVersaoService;
 import com.featurestore.featurestore.service.VersaoService;
 import com.featurestore.featurestore.models.Versao;
 import com.featurestore.featurestore.models.Feature;
@@ -58,15 +59,19 @@ public class VersaoController {
             return ResponseEntity.badRequest().body(Map.of("error", e.getMessage()));
         }
     }
-
+    private final DownloadVersaoService downloadService = new DownloadVersaoService();
     @GetMapping("/{id}/download")
-    public ResponseEntity<?> download(@PathVariable Integer id){
+    public ResponseEntity<?> download(@PathVariable Integer id, HttpServletRequest request){
         try{
+            String emailUsuario = (String) request.getAttribute("emailUsuario");
             Versao versao = versaoService.buscaPorId(id);
             String csv = versao.getCSV();
             if(csv == null || csv.isBlank()){
                 return ResponseEntity.badRequest().body(Map.of("error","Versao nao possui arquivo CSV"));
             }
+            try {
+                downloadService.registrarDownload(emailUsuario, id);
+            }catch (Exception ignored) {}
             return ResponseEntity.ok().header("Content-Type", "text/csv").header("Content-Disposition", "attachment;filename=\"" + versao.getNome() + ".csv\"").body(csv);
         }catch (Exception e){
             return ResponseEntity.badRequest().body(Map.of("error",e.getMessage()));

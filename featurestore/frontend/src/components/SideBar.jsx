@@ -38,7 +38,7 @@ export default function SideBar({ activeSection }) {
           <nav className="sideBarOptions">
             <div className={`row ${activeSection === "dashboard" ? "active" : ""}`}>
               <LayoutDashboard />
-              <button>DASHBOARD</button>
+              <button onClick={()=> navigate("/dashboard")}>DASHBOARD</button>
             </div>
 
             <div className={`row ${activeSection === "datasets" ? "active" : ""}`}>

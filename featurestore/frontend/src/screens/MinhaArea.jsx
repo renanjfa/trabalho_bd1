@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import { listarMeusDatasets } from "../services/datasetservice";
+import { deletarDataset, listarMeusDatasets } from "../services/datasetservice";
 import "./style/MinhaArea.css";
 
 import Header from "../components/Header";
@@ -58,16 +58,29 @@ export default function MinhaArea() {
         <CriarVersaoPopUp
             aberto={popupVersaoAberto}
             idDataset={datasetParaVersao?.id}
-            onClose={() => {
+            onClose={async () => {
+                if(datasetParaVersao?.id){
+                  try {
+                    await deletarDataset(datasetParaVersao.id);
+                  }catch (e) {}
+                }
                 setPopupVersaoAberto(false);
                 setPopupDatasetAberto(false);
+                setdatasetParaVersao(null);
             }}
-            onBack={() => {
+            onBack={async () => {
+              if(datasetParaVersao?.id){
+                try { 
+                  await deletarDataset(datasetParaVersao.id);
+                }catch (e) {}
+              }
                 setPopupVersaoAberto(false);
                 setPopupDatasetAberto(true);
+                setdatasetParaVersao(null);
             }}
             onSubmit={() => {
                 setPopupVersaoAberto(false);
+                setdatasetParaVersao(null);
                 carregarDatasets();
               }}
         />

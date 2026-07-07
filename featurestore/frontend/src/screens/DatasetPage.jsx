@@ -2,6 +2,7 @@ import React,{useState, useEffect} from "react";
 import { useParams } from "react-router-dom";
 import { buscarDatasets } from "../services/datasetservice";
 import { listarVersoesPorDataSet } from "../services/versaoService";
+import { registrarAcesso } from "../services/acessosService";
 import "./style/DatasetPage.css";
 
 import Header from "../components/Header";
@@ -9,6 +10,7 @@ import DatasetPageDetails from '../components/DatasetPageDetails';
 import ListaVersoes from "../components/ListaVersoes";
 import VersaoDetalhes from "../components/VersaoDetalhes";
 import CriarVersaoPopUp from "../components/CriarVersaoPopUp";
+import EstatisticasDatasetPopUp from "../components/EstatisticasDatasetPopUp";
 
 
 export default function DatasetPage() {
@@ -18,6 +20,7 @@ export default function DatasetPage() {
     const [popupVersaoAberto, setPopupVersaoAberto] = useState(false);
     const [selectedVersaoId, setSelectedVersaoId] = useState(null);
     const [versaoBaseId, setVersaoBaseId]= useState(null);
+    const [estatisticasAberto, setEstatisticasAberto] = useState(false);
 
     useEffect(() => {
         carregarDados();
@@ -42,7 +45,7 @@ export default function DatasetPage() {
         
             <div className="content">
                     
-                <DatasetPageDetails dataset={dataset}/>
+                <DatasetPageDetails dataset={dataset} onVerEstatisticas={()=> setEstatisticasAberto(true)}/>
 
                 <ListaVersoes versoes={versoes} selectedVersaoId={selectedVersaoId} onSelectVersao={setSelectedVersaoId}/>
 
@@ -60,7 +63,11 @@ export default function DatasetPage() {
                         carregarDados();
                     }}
                 />
-            
+                <EstatisticasDatasetPopUp
+                    aberto={estatisticasAberto}
+                    onClose={()=> setEstatisticasAberto(false)}
+                    idDataset={parseInt(id)}
+                />
             </div>
         
         </div>
