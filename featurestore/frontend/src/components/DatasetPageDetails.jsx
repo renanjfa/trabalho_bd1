@@ -4,7 +4,7 @@ import "./style/DatasetPageDetails.css";
 
 import { Undo2 } from 'lucide-react';
 
-export default function DatasetPageDetails({ dataset }) {
+export default function DatasetPageDetails({ dataset, onVerEstatisticas }) {
     const navigate = useNavigate();
 
     if (!dataset) {
@@ -42,6 +42,7 @@ export default function DatasetPageDetails({ dataset }) {
                 </p>
             </section>
 
+            <button className="ver-estatisticas" onClick={onVerEstatisticas}>Ver Estatisticas</button>
             <button className="goBack" onClick={() => navigate(-1)} title="Voltar">
                 <Undo2 size={20} />
             </button>
