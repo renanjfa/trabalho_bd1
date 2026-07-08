@@ -17,15 +17,17 @@ public class AcessoDatasetService {
         if (idDataset == null) {
             throw new Exception("ID do dataset é obrigatório.");
         }
-
-        AcessoDataset acesso = new AcessoDataset();
-        acesso.setEmailUsuario(emailUsuario);
-        acesso.setIdDataset(idDataset);
-        acesso.setData(new Date(System.currentTimeMillis()));
-        acesso.setHora(new Time(System.currentTimeMillis()));
-
         try (DAOFactory daoFactory = DAOFactory.getInstance()) {
             AcessoDatasetDAO dao = daoFactory.getAcessoDatasetDAO();
+            List<AcessoDataset> recentes = dao.getByEmailAndDatasetRecente(emailUsuario, idDataset, 30);
+            if(!recentes.isEmpty()){
+                return;
+            }
+            AcessoDataset acesso = new AcessoDataset();
+            acesso.setEmailUsuario(emailUsuario);
+            acesso.setIdDataset(idDataset);
+            acesso.setData(new Date(System.currentTimeMillis()));
+            acesso.setHora(new Time(System.currentTimeMillis()));
             dao.create(acesso);
         }
     }

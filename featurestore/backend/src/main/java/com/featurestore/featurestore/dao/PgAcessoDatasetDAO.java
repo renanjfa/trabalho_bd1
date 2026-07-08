@@ -31,6 +31,11 @@ public class PgAcessoDatasetDAO implements AcessoDatasetDAO {
                                 "SELECT * FROM featurestore.usuario_acessa_dataset " +
                                 "WHERE email_usuario = ?;";
 
+    private static final String GET_RECENTE_QUERY =
+                                "SELECT * FROM featurestore.usuario_acessa_dataset " +
+                                "WHERE email_usuario = ? AND id_dataset = ? " +
+                                "AND (data + hora) > (NOW() - CAST(? || ' seconds' AS INTERVAL));";
+
     private static final String ALL_QUERY =
                                 "SELECT * FROM featurestore.usuario_acessa_dataset; ";
 
@@ -166,6 +171,33 @@ public class PgAcessoDatasetDAO implements AcessoDatasetDAO {
             throw new SQLException(
                 "Erro ao consultar acessos do usuário."
             );
+        }
+
+        return adList;
+    }
+
+    @Override
+    public List<AcessoDataset> getByEmailAndDatasetRecente(String email, Integer idDataset, int segundos) throws SQLException {
+        List<AcessoDataset> adList = new ArrayList<>();
+
+        try (PreparedStatement statement = connection.prepareStatement(GET_RECENTE_QUERY)) {
+            statement.setString(1, email);
+            statement.setInt(2, idDataset);
+            statement.setString(3, String.valueOf(segundos));
+
+            try (ResultSet result = statement.executeQuery()) {
+                while (result.next()) {
+                    AcessoDataset ad = new AcessoDataset();
+                    ad.setEmailUsuario(result.getString("email_usuario"));
+                    ad.setIdDataset(result.getInt("id_dataset"));
+                    ad.setData(result.getDate("data"));
+                    ad.setHora(result.getTime("hora"));
+                    adList.add(ad);
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PgAcessoDatasetDAO.class.getName()).log(Level.SEVERE, "DAO", ex);
+            throw new SQLException("Erro ao verificar acesso recente.");
         }
 
         return adList;
