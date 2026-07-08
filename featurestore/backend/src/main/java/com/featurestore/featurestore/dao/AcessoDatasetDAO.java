@@ -11,5 +11,7 @@ public interface AcessoDatasetDAO extends DAO<AcessoDataset> {
 
     public List<AcessoDataset> getByEmailUsuario(String email) throws SQLException;
 
+    public List<AcessoDataset> getByEmailAndDatasetRecente(String email, Integer idDataset, int segundos) throws SQLException;
+
     
 }
